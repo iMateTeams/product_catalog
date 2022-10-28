@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npm fix-style
+cd ./frontend
+npm run fix-style
+npx lint-staged
