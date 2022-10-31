@@ -30,8 +30,7 @@
     "format": "prettier --write . --ignore-path .gitignore",
     "lint": "eslint . --ignore-path .gitignore",
     "fix-style": "npm run format && npm run lint -- --fix",
-    "prepare": "husky install",
-    "husky": "node ./node_modules/husky/lib/bin.js"
+    "prepare": "cd .. && husky install frontend/.husky"
   },
   "lint-staged": {
     "*.tsx": "npm run lint"
