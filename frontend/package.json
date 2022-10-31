@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "frontend",
   "homepage": "https://iMateTeams.github.io/product_catalog",
@@ -12,9 +13,12 @@
     "@types/node": "^17.0.45",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
+    "classnames": "^2.3.2",
+    "gh-pages": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.4",
+    "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
     "typescript": "^4.8.4",
     "web-vitals": "^2.1.4"
@@ -51,6 +55,8 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/dom": "^8.19.0",
+    "@testing-library/react": "^13.4.0",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
     "@typescript-eslint/parser": "^5.41.0",
     "eslint": "^8.26.0",
@@ -61,3 +67,4 @@
     "prettier": "2.7.1"
   }
 }
+>>>>>>> f1b2977 (router was added)

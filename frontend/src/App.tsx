@@ -1,59 +1,93 @@
+<<<<<<< HEAD
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/counter/Counter';
+import { Navigate, Route, Routes } from 'react-router-dom';
+// import logo from './logo.svg';
+// import { Counter } from './features/counter/Counter';
 import './App.css';
+import { MainNav } from './components/MainNav';
+import { AccessoriesPage } from './pages/AccessoriesPage';
+import { CatalogPage } from './pages/CatalogPage';
+import { Home } from './pages/Home';
+import { PhoneCardPage } from './pages/PhoneCardPage';
+import { TabletsPage } from './pages/TabletsPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <Counter />
-        <p>
-          Edit <code>src/App.tsx
-          </code> and save to reload.
-        </p>
-        <span>
-          <span>Learn</span>
-          <a
-            className="App-link"
-            href="https://reactjs.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux
-          </a>
-          <span>, </span>
-          <a
-            className="App-link"
-            href="https://redux-toolkit.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Redux Toolkit
-          </a>
-          ,<span> and </span>
-          <a
-            className="App-link"
-            href="https://react-redux.js.org/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            React Redux
-          </a>
-        </span>
-      </header>
-    </div>
+    <>
+      <MainNav />
+      <div className="section">
+        <div className="container">
+          <Routes>
+            <Route
+              path="*"
+              element={<h1 className="title">Page not found</h1>}
+            />
+            <Route path="/" element={<Home />} />
+            <Route path="home" element={<Navigate to="/" replace />} />
+
+            <Route path="phones">
+              <Route index element={<CatalogPage/>} />
+              <Route path=":idPhone" element={<PhoneCardPage />} />
+            </Route>
+            <Route path="tablets">
+              <Route index element={<TabletsPage />} />
+            </Route>
+            <Route path="accessories">
+              <Route index element={<AccessoriesPage />} />
+            </Route>
+          </Routes>
+        </div>
+      </div>
+      {/* <Footer /> */}
+    </>
   );
 }
 
 export default App;
+=======
+import React from 'react';
+import { Navigate, Route, Routes } from 'react-router-dom';
+// import logo from './logo.svg';
+// import { Counter } from './features/counter/Counter';
+import './App.css';
+import { MainNav } from './components/MainNav';
+import { AccessoriesPage } from './pages/AccessoriesPage';
+import { CatalogPage } from './pages/CatalogPage';
+import { Home } from './pages/Home';
+import { PhoneCardPage } from './pages/PhoneCardPage';
+import { TabletsPage } from './pages/TabletsPage';
+
+function App() {
+  return (
+    <>
+      <MainNav />
+      <div className="section">
+        <div className="container">
+          <Routes>
+            <Route
+              path="*"
+              element={<h1 className="title">Page not found</h1>}
+            />
+            <Route path="/" element={<Home />} />
+            <Route path="home" element={<Navigate to="/" replace />} />
+
+            <Route path="phones">
+              <Route index element={<CatalogPage/>} />
+              <Route path=":idPhone" element={<PhoneCardPage />} />
+            </Route>
+            <Route path="tablets">
+              <Route index element={<TabletsPage />} />
+            </Route>
+            <Route path="accessories">
+              <Route index element={<AccessoriesPage />} />
+            </Route>
+          </Routes>
+        </div>
+      </div>
+      {/* <Footer /> */}
+    </>
+  );
+}
+
+export default App;
+>>>>>>> f1b2977 (router was added)
