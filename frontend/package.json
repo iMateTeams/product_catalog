@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {
   "name": "frontend",
   "homepage": "https://iMateTeams.github.io/product_catalog",
@@ -67,4 +66,3 @@
     "prettier": "2.7.1"
   }
 }
->>>>>>> f1b2977 (router was added)
