@@ -1,5 +1,3 @@
-# importfolder
-
 name: Super-Linter
 
 on: push
@@ -9,17 +7,13 @@ jobs:
     name: Lint code base
     runs-on: ubuntu-latest
     steps:
-      - with:
-          args: --exclude node_modules
-          path: .
-          name: Checkout code
-          uses: actions/checkout@v2
-      - with:
-          args: --exclude node_modules
-          path: .
-          name: Run Super-Linter
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Super-Linter
         uses: github/super-linter@v3
         env:
+          path: "./frontend"
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
