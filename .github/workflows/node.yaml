@@ -9,13 +9,15 @@ jobs:
     name: Lint code base
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-        with:
-          path: ./frontend
-
-      - name: Run Super-Linter
+      - with:
+          args: --exclude node_modules
+          path: .
+          name: Checkout code
+          uses: actions/checkout@v2
+      - with:
+          args: --exclude node_modules
+          path: .
+          name: Run Super-Linter
         uses: github/super-linter@v3
         env:
           DEFAULT_BRANCH: main
