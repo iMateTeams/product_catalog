@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import './ProductCard.scss';
-import image from './images/image.jpg';
+import image from '../../images/image.jpg';
 // import { Card } from './types/card';
 
 /*type Props = {

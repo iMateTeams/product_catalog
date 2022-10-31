@@ -28,7 +28,7 @@ const App: React.FC = () => {
             <Route path="home" element={<Navigate to="/" replace />} />
 
             <Route path="phones">
-              <Route index element={<CatalogPage/>} />
+              <Route index element={<ProductCard />} />
               <Route path=":idPhone" element={<PhoneCardPage />} />
             </Route>
             <Route path="tablets">
@@ -41,7 +41,6 @@ const App: React.FC = () => {
         </div>
       </div>
       {/* <Footer /> */}
-      <ProductCard />
     </>
   );
 };

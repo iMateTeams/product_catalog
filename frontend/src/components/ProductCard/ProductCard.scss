@@ -131,13 +131,13 @@
       width: 40px;
       border: 1px solid #B4BDC4;
       background: #fff;
-      background-image: url('./images/Favourites.svg');
+      background-image: url('../../images/Favourites.svg');
       background-repeat: no-repeat;
       background-position: center;
       transition: box-shadow 300ms;
 
       &--added {
-        background-image: url('./images/FavouritesFilled.svg');
+        background-image: url('../../images/FavouritesFilled.svg');
         border: 1px solid #E2E6E9;
         color: #27AE60;
       }
