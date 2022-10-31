@@ -1,6 +1,6 @@
 import React from 'react';
 import { phones } from '../phones/phones_data';
-export const CatalogPage = () => {
+export const CatalogPage: React.FC = () => {
 
   return(
     <>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageNavLink } from './PageNavLink';
 
-export const MainNav = () => (
+export const MainNav: React.FC = () => (
   <nav
     data-cy="Nav"
     className="navbar is-light is-fixed-top is-mobile has-shadow"
