@@ -1,9 +1,6 @@
 on: push
-
-paths:
-  tests: ./frontend
-
 name: Lint
+
 
 
 jobs:
