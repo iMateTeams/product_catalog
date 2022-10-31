@@ -4,12 +4,6 @@ import { Counter } from './features/counter/Counter';
 import './App.css';
 
 function App() {
-  const a = 123;
-
-
-  
-  const b ='123';
-
   return (
     <div className="App">
       <header className="App-header">
