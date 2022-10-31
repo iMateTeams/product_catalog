@@ -4,11 +4,11 @@ import { Counter } from './features/counter/Counter';
 import './App.css';
 
 function App() {
-  var a = 123
+  const a = 123;
 
 
   
-  var b ='123'
+  const b ='123';
 
   return (
     <div className="App">
