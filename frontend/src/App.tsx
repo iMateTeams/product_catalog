@@ -1,3 +1,5 @@
+import './App.css';
+import { ProductCard } from './components/ProductCard';
 
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
@@ -39,6 +41,7 @@ const App: React.FC = () => {
         </div>
       </div>
       {/* <Footer /> */}
+      <ProductCard />
     </>
   );
 };
