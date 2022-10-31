@@ -31,7 +31,7 @@
     "lint": "eslint ./src  --ignore-path .gitignore",
     "lint:fix": "eslint ./src --fix --ignore-path .gitignore",
     "fix-style": "npm run format && npm run lint -- --fix",
-    "prepare": "cd .. && husky install frontend/.husky && cd ./frontend && husky add .husky/pre-commit \"cd ./frontend && npm run lint:fix && git add ./frontend\""
+    "prepare": "cd .. && husky install frontend/.husky && cd ./frontend && husky add .husky/pre-commit \"cd ./frontend && npm run lint:fix && git add .\""
   },
   "eslintConfig": {
     "extends": [
