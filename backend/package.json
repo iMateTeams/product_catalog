@@ -6,7 +6,13 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "prepare": "cd .. && husky install backend/.husky && cd ./frontend && husky add .husky/pre-commit \"cd ./frontend && npm run lint:fix && git add .\""
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "format": "prettier --write . --ignore-path .gitignore",
+    "lint": "eslint ./src  --ignore-path .gitignore",
+    "lint:fix": "eslint ./src --fix --ignore-path .gitignore",
+    "fix-style": "npm run format && npm run lint -- --fix",
+    "prepare": "cd .. && husky install backend/.husky && cd ./backend && husky add .husky/pre-commit \"cd ./backend && npm run lint:fix && git add .\""
   },
   "author": "",
   "license": "ISC",
