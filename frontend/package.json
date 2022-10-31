@@ -30,7 +30,7 @@
     "format": "prettier --write . --ignore-path .gitignore",
     "lint": "eslint ./src  --ignore-path .gitignore",
     "lint:fix": "eslint ./src --fix --ignore-path .gitignore",
-    "fix-style": "npm run format && npm run lint -- --fix",
+    "fix-style": "npm run format && npm run lint -- --fix"
   },
   "eslintConfig": {
     "extends": [

@@ -4,6 +4,9 @@ import { Counter } from './features/counter/Counter';
 import './App.css';
 
 function App() {
+  var a = 123
+  var b ='123'
+
   return (
     <div className="App">
       <header className="App-header">
@@ -14,7 +17,7 @@ function App() {
           </code> and save to reload.
         </p>
         <span>
-          <span>Learn </span>
+          <span>Learn</span>
           <a
             className="App-link"
             href="https://reactjs.org/"
