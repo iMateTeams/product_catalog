@@ -1,5 +1,5 @@
 # Product catalog
-- [DEMO LINK]()
+- [DEMO LINK](https://iMateTeams.github.io/product_catalog)
 
 # Get the initial code
 1. Clone the repo
