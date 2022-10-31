@@ -11,7 +11,7 @@ function App() {
         <Counter />
         <p>
           Edit <code>src/App.tsx
-            </code> and save to reload.
+          </code> and save to reload.
         </p>
         <span>
           <span>Learn </span>

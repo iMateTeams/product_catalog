@@ -29,12 +29,8 @@
     "deploy": "gh-pages -d build",
     "format": "prettier --write . --ignore-path .gitignore",
     "lint": "eslint ./src  --ignore-path .gitignore",
-    "lint:fix": "eslint ./src --fix --ignore-path .gitignore"
+    "lint:fix": "eslint ./src --fix --ignore-path .gitignore",
     "fix-style": "npm run format && npm run lint -- --fix",
-    "prepare": "cd .. && husky install frontend/.husky"
-  },
-  "lint-staged": {
-    "*.tsx": "npm run lint"
   },
   "eslintConfig": {
     "extends": [
@@ -62,5 +58,18 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "2.7.1"
+  },
+
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "npm run lint:fix",
+      "git add"
+    ]
   }
 }
