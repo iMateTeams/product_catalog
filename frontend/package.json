@@ -30,7 +30,8 @@
     "format": "prettier --write . --ignore-path .gitignore",
     "lint": "eslint ./src  --ignore-path .gitignore",
     "lint:fix": "eslint ./src --fix --ignore-path .gitignore",
-    "fix-style": "npm run format && npm run lint -- --fix"
+    "fix-style": "npm run format && npm run lint -- --fix",
+    "prepare": "cd .. && husky install frontend/.husky"
   },
   "eslintConfig": {
     "extends": [
@@ -59,15 +60,17 @@
     "lint-staged": "^13.0.3",
     "prettier": "2.7.1"
   },
+
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
       "npm run lint:fix",
       "git add"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }
