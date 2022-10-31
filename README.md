@@ -1,5 +1,5 @@
 # Product catalog
-- [DEMO LINK](https://fe-jul22-team6.github.io/product_catalog/)
+- [DEMO LINK]()
 
 # Get the initial code
 1. Clone the repo
