@@ -1,29 +1,19 @@
 import React from 'react';
-import { phones } from '../phones/phones_data';
-export const CatalogPage: React.FC = () => {
+import { ProductCard } from '../components/ProductCard';
+import { productT } from '../types/productT';
+
+type Props = {
+  products: productT[];
+}
+export const CatalogPage: React.FC<Props> = ({ products }) => {
 
   return(
     <>
       <h1 className="title">Catalog</h1>
       <div className="block">
-        {phones.map(phone => {
-          const {
-            id,
-            category,
-            name,
-            price,
-          } = phone;
-
+        {products.map(product => {
           return (
-            <tr
-              data-cy="phone"
-              key={id}
-              className='has-background-warning'
-            >
-              <td>{category}</td>
-              <td>{name}</td>
-              <td>{price}</td>
-            </tr>
+            <ProductCard product={product} key={product.id}/>
           );
         }
         )}
