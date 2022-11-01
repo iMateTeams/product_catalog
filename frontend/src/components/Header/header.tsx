@@ -1,10 +1,10 @@
 import logo from '../../images/headerLogo.svg';
-import './header.css';
+import './main.scss';
 
 export const Header = () => (
   <header className="header">
     <div className="header__logo-n-nav">
-      <a href="#" className="header_logo-link">
+      <a href="#" className="header__logo-link">
         <img
           className="header__logo"
           src={logo} 
@@ -13,24 +13,24 @@ export const Header = () => (
       </a>
 
       <nav className="desktop-menu">
-        <ul className="desktop-menu-list">
-          <li className="desktop-menu-item">
-            <a href="#" className="desktop-menu-link">
+        <ul className="desktop-menu__list">
+          <li className="desktop-menu__item">
+            <a href="#" className="desktop-menu__link">
               Home
             </a>
           </li>
-          <li className="desktop-menu-item">
-            <a href="#" className="desktop-menu-link">
+          <li className="desktop-menu__item">
+            <a href="#" className="desktop-menu__link">
               Phones
             </a>
           </li>
-          <li className="desktop-menu-item">
-            <a href="#" className="desktop-menu-link">
+          <li className="desktop-menu__item">
+            <a href="#" className="desktop-menu__link">
               Tablets
             </a>
           </li>
-          <li className="desktop-menu-item">
-            <a href="#" className="desktop-menu-link">
+          <li className="desktop-menu__item">
+            <a href="#" className="desktop-menu__link">
               Accessories
             </a>
           </li>
