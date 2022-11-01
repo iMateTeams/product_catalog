@@ -28,7 +28,7 @@ const App: React.FC = () => {
             <Route path="home" element={<Navigate to="/" replace />} />
 
             <Route path="phones">
-              <Route index element={<ProductCard />} />
+              <Route index element={<CatalogPage />} />
               <Route path=":idPhone" element={<PhoneCardPage />} />
             </Route>
             <Route path="tablets">

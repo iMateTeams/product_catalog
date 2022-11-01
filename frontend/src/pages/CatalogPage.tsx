@@ -1,33 +1,43 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { PaginationButtons } from '../components/Pagination/PaginationButtons';
+import { PaginationPerPage } from '../components/Pagination/PaginationPerPage';
+import { ProductCard } from '../components/ProductCard';
 import { phones } from '../phones/phones_data';
+
 export const CatalogPage: React.FC = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [phonesPerPage, setPhonesPerPage] = useState(16);
+  const [ visiblePhones, setVisiblePhones] = useState(phones.slice(0,phonesPerPage));
+
+  useEffect(() => {
+    const lastPhoneIndex = currentPage * phonesPerPage; 
+    const firstPhoneIndex = lastPhoneIndex - phonesPerPage;
+
+    setVisiblePhones(phones.slice(firstPhoneIndex,lastPhoneIndex));
+
+  }, [currentPage, phonesPerPage]);
 
   return(
     <>
-      <h1 className="title">Catalog</h1>
+      <h1 className="phones_title">Mobile phones</h1>
+      <PaginationPerPage 
+        amountPhones={phones.length}
+        phonesPerPage={phonesPerPage}
+        setPhonesPerPage={setPhonesPerPage}
+        setCurrentPage={setCurrentPage}
+      />
+      
       <div className="block">
-        {phones.map(phone => {
-          const {
-            id,
-            category,
-            name,
-            price,
-          } = phone;
-
-          return (
-            <tr
-              data-cy="phone"
-              key={id}
-              className='has-background-warning'
-            >
-              <td>{category}</td>
-              <td>{name}</td>
-              <td>{price}</td>
-            </tr>
-          );
-        }
+        {visiblePhones.map(phone => 
+          (<ProductCard />)
         )}
       </div>
+      <PaginationButtons 
+        amountPhones={phones.length}
+        phonesPerPage={phonesPerPage}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </>
   );
 };
