@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { phones } from '../phones/phones_data';
 export const CatalogPage = () => {
 
