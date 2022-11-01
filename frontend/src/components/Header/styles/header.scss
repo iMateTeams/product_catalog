@@ -1,0 +1,134 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  position: sticky;
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 140%;
+  text-align: center;
+  box-shadow: 0px 1px 0px #E2E6E9;
+
+  &__logo-link {
+    display: flex;
+    align-self: center;
+    width: 64px;
+    height: 22px;
+    margin-left: 16px;
+    margin-right: 32px;
+
+    @include onDesktop {
+      width: 80px;
+      height: 30px;
+      margin-left: 24px;
+      margin-right: 48px;
+    }
+  }
+  
+  &__logo {
+    display: flex;
+    align-self: center;
+    width: 64px;
+    height: 22px;
+
+    @include onDesktop {
+      width: 80px;
+      height: 30px;
+    }
+  }
+
+  &__menu-opener-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    box-shadow: -1px 0px 0px #E2E6E9;
+
+    @include onTablet {
+      display: none;
+    }
+  }
+  
+  &__menu-opener {
+    width: 14px;
+    height: 14px;
+    background-image: url(../../../images/menuIcon.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: 0.3s;
+  }
+
+  &__menu-opener:hover {
+    transform: scale(1.1);
+  }
+  
+  &__link-n-beg {
+    display: none;
+
+    @include onTablet {
+      display: flex;
+      flex-direction: row;
+    }
+  }
+
+  &__logo-n-nav {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &__liked-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 48px;
+      height: 48px;
+      box-shadow: -1px 0px 0px #E2E6E9;
+
+      @include onDesktop {
+        width: 64px;
+        height: 64px;
+      }
+  }
+
+  &__liked {
+    width: 14px;
+    height: 14px;
+    background-image: url(../../../images/liked.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  
+  &__beg-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    box-shadow: -1px 0px 0px #E2E6E9;
+
+    @include onDesktop {
+      width: 64px;
+      height: 64px;
+    }
+  }
+
+  &__beg {
+    width: 14px;
+    height: 14px;
+    background-image: url(../../../images/beg.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
