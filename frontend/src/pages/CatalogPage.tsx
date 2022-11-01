@@ -3,11 +3,16 @@ import { PaginationButtons } from '../components/Pagination/PaginationButtons';
 import { PaginationPerPage } from '../components/Pagination/PaginationPerPage';
 import { ProductCard } from '../components/ProductCard';
 import { phones } from '../phones/phones_data';
+import { productT } from '../types/productT';
 
-export const CatalogPage: React.FC = () => {
+type Props = {
+  products: productT[];
+}
+
+export const CatalogPage: React.FC<Props> = ({ products }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [phonesPerPage, setPhonesPerPage] = useState(16);
-  const [ visiblePhones, setVisiblePhones] = useState(phones.slice(0,phonesPerPage));
+  const [visiblePhones, setVisiblePhones] = useState(products.slice(0,phonesPerPage));
 
   useEffect(() => {
     const lastPhoneIndex = currentPage * phonesPerPage; 
@@ -21,19 +26,22 @@ export const CatalogPage: React.FC = () => {
     <>
       <h1 className="phones_title">Mobile phones</h1>
       <PaginationPerPage 
-        amountPhones={phones.length}
+        amountPhones={products.length}
         phonesPerPage={phonesPerPage}
         setPhonesPerPage={setPhonesPerPage}
         setCurrentPage={setCurrentPage}
       />
       
       <div className="block">
-        {visiblePhones.map(phone => 
-          phone.id
+        {visiblePhones.map(product => {
+          return (
+            <ProductCard product={product} key={product.id}/>
+          );
+        }
         )}
       </div>
       <PaginationButtons 
-        amountPhones={phones.length}
+        amountPhones={products.length}
         phonesPerPage={phonesPerPage}
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}

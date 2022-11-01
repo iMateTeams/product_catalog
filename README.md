@@ -3,7 +3,14 @@
 
 # Get the initial code
 1. Clone the repo
+1. Run `cd ./frontend`
 1. Run `npm install` to install the dependencies
+1. Run `cd ./backend`
+1. Run `npm install` to install the dependencies
+
+# To run your server in dev mode 
+1. Run `npm run dev`
+
 
 # How to develop a feature
 1. Pull the latest main.

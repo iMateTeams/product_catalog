@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import './ProductCard.scss';
-import image from '../../images/image.jpg';
-// import { Card } from './types/card';
+import { productT } from '../../types/productT';
 
-/*type Props = {
-  card: Card;
-}*/
+type Props = {
+  product: productT;
+}
 
-export const ProductCard: React.FC/*<Props>*/ = (/* { card } */) => {
-/*  const {
+export const ProductCard: React.FC<Props> = ({ product }) => {
+  const {
     id,
     category,
     phoneId,
@@ -23,8 +22,8 @@ export const ProductCard: React.FC/*<Props>*/ = (/* { card } */) => {
     ram,
     year,
     image,
-  } = card;
-*/
+  } = product;
+
   const [addToCart, setAddToCart] = useState(false);
   const [addToFavorites, setAddToFavorites] = useState(false);
 
@@ -35,22 +34,23 @@ export const ProductCard: React.FC/*<Props>*/ = (/* { card } */) => {
   const handleAddToFavorites = () => {
     setAddToFavorites(prevState => !prevState);
   };
+
+  const imgSrc = `../../img/${image}`;
+
   return (
     <section className="card">
       <div className="card__content">
-        <img src={image} alt="phoneImage" className="card__image" />
+        <img src='imgSrc' alt="phoneImage" className="card__image" />
         <div className="card__name">
-          {/* {name} */}
+          {name}
           Apple iPhone Xs 64GB Silver (iMT9G2FS/A)
         </div>
         <div className="card__price">
           <div className="card__price-current">
-            {/* {price} */}
-            $799
+            {`${price}€`}
           </div>
           <div className="card__price-full">
-            {/* {fullPrice} */}
-            $899
+            {fullPrice}
           </div>
         </div>
         <div className="card__specs">
@@ -59,8 +59,7 @@ export const ProductCard: React.FC/*<Props>*/ = (/* { card } */) => {
               Screen
             </div>
             <div className="card__specs-value">
-              {/* {screen} */}
-              5.8” OLED
+              {screen}
             </div>
           </div>
           <div className="card__specs-block">
@@ -68,8 +67,7 @@ export const ProductCard: React.FC/*<Props>*/ = (/* { card } */) => {
               Capacity
             </div>
             <div className="card__specs-value">
-              {/* {capacity} */}
-              64 GB
+              {capacity}
             </div>
           </div>
           <div className="card__specs-block">
@@ -77,8 +75,7 @@ export const ProductCard: React.FC/*<Props>*/ = (/* { card } */) => {
               RAM
             </div>
             <div className="card__specs-value">
-              {/* {ram} */}
-              4 GB
+              {ram}
             </div>
           </div>
         </div>

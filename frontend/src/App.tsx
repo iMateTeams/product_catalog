@@ -1,7 +1,7 @@
 import './App.css';
 import { ProductCard } from './components/ProductCard';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 // import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
@@ -12,8 +12,20 @@ import { CatalogPage } from './pages/CatalogPage';
 import { Home } from './pages/Home';
 import { PhoneCardPage } from './pages/PhoneCardPage';
 import { TabletsPage } from './pages/TabletsPage';
+import { productT } from './types/productT';
+
+import { getAll } from '../src/api/products';
 
 const App: React.FC = () => {
+  const [products, setProducts] = useState<productT[]>([]);
+
+  useEffect(() => {
+    getAll().then((data) => {
+      setProducts(data);
+    });
+  }, []);
+
+
   return (
     <>
       <MainNav />
