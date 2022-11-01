@@ -1,5 +1,5 @@
 // import React from 'react';
-import { PageNavLink } from './PageNavLink';
+import { PageNavLink } from './Header/PageNavLink';
 
 export const MainNav: React.FC = () => (
   <nav
