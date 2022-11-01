@@ -12,6 +12,7 @@ import { CatalogPage } from './pages/CatalogPage';
 import { Home } from './pages/Home';
 import { PhoneCardPage } from './pages/PhoneCardPage';
 import { TabletsPage } from './pages/TabletsPage';
+import { PhonesPage } from './components/PhonesCatalog/PhonesPage';
 
 const App: React.FC = () => {
   return (
@@ -28,7 +29,7 @@ const App: React.FC = () => {
             <Route path="home" element={<Navigate to="/" replace />} />
 
             <Route path="phones">
-              <Route index element={<ProductCard />} />
+              <Route index element={<PhonesPage />} />
               <Route path=":idPhone" element={<PhoneCardPage />} />
             </Route>
             <Route path="tablets">
