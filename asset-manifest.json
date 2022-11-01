@@ -1,16 +1,22 @@
 {
   "files": {
-    "main.css": "/product_catalog/static/css/main.329a3ffd.css",
-    "main.js": "/product_catalog/static/js/main.d89af404.js",
-    "static/js/787.cda612ba.chunk.js": "/product_catalog/static/js/787.cda612ba.chunk.js",
-    "static/media/logo.svg": "/product_catalog/static/media/logo.db36153e906043854e743ee53cf5fff2.svg",
+    "main.css": "/product_catalog/static/css/main.42c7f856.css",
+    "main.js": "/product_catalog/static/js/main.b0ca672f.js",
+    "static/media/headerLogo.svg": "/product_catalog/static/media/headerLogo.5700773f3ec1703a368379af224446e7.svg",
+    "static/media/Mont-Regular.ttf": "/product_catalog/static/media/Mont-Regular.e797167c18f9897bb607.ttf",
+    "static/media/Mont-SemiBold.ttf": "/product_catalog/static/media/Mont-SemiBold.0b5e68ebb36ca4006e21.ttf",
+    "static/media/Mont-Bold.ttf": "/product_catalog/static/media/Mont-Bold.3675b597d3ffb2b75168.ttf",
+    "static/media/beg.svg": "/product_catalog/static/media/beg.1962e42406793fa66f0d.svg",
+    "static/media/Favourites.svg": "/product_catalog/static/media/Favourites.6c1d1b28651481bdac89.svg",
+    "static/media/liked.svg": "/product_catalog/static/media/liked.8b204efcfb5a53cadd96.svg",
+    "static/media/FavouritesFilled.svg": "/product_catalog/static/media/FavouritesFilled.9a0acd7b91ae2b20f628.svg",
     "index.html": "/product_catalog/index.html",
-    "main.329a3ffd.css.map": "/product_catalog/static/css/main.329a3ffd.css.map",
-    "main.d89af404.js.map": "/product_catalog/static/js/main.d89af404.js.map",
-    "787.cda612ba.chunk.js.map": "/product_catalog/static/js/787.cda612ba.chunk.js.map"
+    "static/media/menuIcon.svg": "/product_catalog/static/media/menuIcon.744ac0b04d84e4feeeb5.svg",
+    "main.42c7f856.css.map": "/product_catalog/static/css/main.42c7f856.css.map",
+    "main.b0ca672f.js.map": "/product_catalog/static/js/main.b0ca672f.js.map"
   },
   "entrypoints": [
-    "static/css/main.329a3ffd.css",
-    "static/js/main.d89af404.js"
+    "static/css/main.42c7f856.css",
+    "static/js/main.b0ca672f.js"
   ]
 }
