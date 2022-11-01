@@ -1,5 +1,6 @@
 import logo from '../../images/headerLogo.svg';
 import './main.scss';
+import { PageNavLink } from './PageNavLink';
 
 export const Header = () => (
   <header className="header">
@@ -15,24 +16,16 @@ export const Header = () => (
       <nav className="desktop-menu">
         <ul className="desktop-menu__list">
           <li className="desktop-menu__item">
-            <a href="#" className="desktop-menu__link">
-              Home
-            </a>
+            <PageNavLink to="/" textLink="Home" />
           </li>
           <li className="desktop-menu__item">
-            <a href="#" className="desktop-menu__link">
-              Phones
-            </a>
+            <PageNavLink to="phones" textLink="Phones" />
           </li>
           <li className="desktop-menu__item">
-            <a href="#" className="desktop-menu__link">
-              Tablets
-            </a>
+            <PageNavLink to="tablets" textLink="Tablets" />
           </li>
           <li className="desktop-menu__item">
-            <a href="#" className="desktop-menu__link">
-              Accessories
-            </a>
+            <PageNavLink to="accessories" textLink="accessories" />
           </li>
         </ul>
       </nav>
