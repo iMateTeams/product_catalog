@@ -29,7 +29,7 @@ export const CatalogPage: React.FC = () => {
       
       <div className="block">
         {visiblePhones.map(phone => 
-          (<ProductCard />)
+          phone.id
         )}
       </div>
       <PaginationButtons 
