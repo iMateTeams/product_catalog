@@ -1,0 +1,93 @@
+@import '../../pages/utils/mixins.scss';
+@import '../../pages/utils/vars.scss';
+
+.footer {
+  padding: 32px;
+  margin-top: 80px;
+  box-shadow: 0px -1px 0px #E2E6E9;
+
+  &__container {
+    display: flex;
+    margin: auto;
+    max-width: 1150px;
+    justify-content: space-between;
+  
+    @include onMobile {
+      display: block;
+    }
+  }
+
+  &__logo {
+    @include onMobile {
+      margin-bottom: 32px;
+    }
+  }
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+
+    @include onMobile {
+      flex-direction: column;
+      margin-bottom: 32px;
+    }
+
+    @include onTablet {
+      width: 330px;
+    }
+
+    &__item {
+      display: flex;
+      list-style-type: none;
+      align-items: center;
+
+      @include onMobile {
+        &:not(:last-child) {
+          margin-bottom: 16px;
+        }
+      }
+    }
+
+    &__link {
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 11px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: $secondary-color-gray;
+      transition-property: color;
+      transition: 0.3s;
+
+      &:hover {
+        color: $primary-color-black;
+      }
+    }
+  }
+  &__back_top {
+    display: flex;
+    align-items: center;
+
+    @include onMobile {
+      justify-content: center;
+    }
+
+    &_text {
+      font-style: normal;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 15px;
+      color: $secondary-color-gray;
+    }
+
+    &_link {
+      display: inline-block;
+      margin-left: 20px;
+      content: "";
+      background-image: url('../../images/back_to_top.svg');
+      width: 32px;
+      height: 32px;
+      display: block;
+    }
+  }
+}

@@ -1,4 +1,7 @@
 import './App.css';
+import { ProductCard } from './components/ProductCard';
+import { Footer } from './components/Footer';
+
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 // import logo from './logo.svg';
@@ -74,7 +77,7 @@ const App: React.FC = () => {
           </Routes>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 };
