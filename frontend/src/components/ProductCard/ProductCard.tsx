@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
-import './ProductCard.scss';
+import productCard from './ProductCard.module.scss';
 import { productT } from '../../types/productT';
+import imageTest from '../../img/phones/apple-iphone-11/black/00.jpg';
 
 type Props = {
   product: productT;
@@ -35,77 +36,84 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
     setAddToFavorites(prevState => !prevState);
   };
 
-  const imgSrc = `../../img/${image}`;
+  const imgSrc = `../../${image}`;
 
   return (
-    <section className="card">
-      <div className="card__content">
-        <img src='imgSrc' alt="phoneImage" className="card__image" />
-        <div className="card__name">
+    <section className={productCard.card}>
+      <div className={productCard.card__content}>
+        <div className={productCard.card__image}>
+          <img src={imageTest} alt="phoneImage" className={productCard.card__image_1}/>
+        </div>
+        <div className={productCard.card__name}>
           {name}
-          Apple iPhone Xs 64GB Silver (iMT9G2FS/A)
         </div>
-        <div className="card__price">
-          <div className="card__price-current">
-            {`${price}€`}
+        <div className={productCard.card__price}>
+          <div className={productCard.card__price_current}>
+            {`${price}$`}
           </div>
-          <div className="card__price-full">
-            {fullPrice}
+          <div className={productCard.card__price_full}>
+            {`${fullPrice}$`}
           </div>
         </div>
-        <div className="card__specs">
-          <div className="card__specs-block">
-            <div className="card__specs-title">
+        <div className={productCard.card__specs}>
+          <div className={productCard.card__specs_block}>
+            <div className={productCard.card__specs_title}>
               Screen
             </div>
-            <div className="card__specs-value">
+            <div className={productCard.card__specs_value}>
               {screen}
             </div>
           </div>
-          <div className="card__specs-block">
-            <div className="card__specs-title">
+          <div className={productCard.card__specs_block}>
+            <div className={productCard.card__specs_title}>
               Capacity
             </div>
-            <div className="card__specs-value">
+            <div className={productCard.card__specs_value}>
               {capacity}
             </div>
           </div>
-          <div className="card__specs-block">
-            <div className="card__specs-title">
+          <div className={productCard.card__specs_block}>
+            <div className={productCard.card__specs_title}>
               RAM
             </div>
-            <div className="card__specs-value">
+            <div className={productCard.card__specs_value}>
               {ram}
             </div>
           </div>
         </div>
-        <div className="card__buttons">
+        <div className={productCard.card__buttons}>
           {addToCart ? (
             <button
               type="button"
-              className="card__buttons-cart"
-              onClick={handleAddToCart}
-            >
-              Add to cart
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="card__buttons-cart card__buttons-cart--added"
+              className={productCard.card__buttons_cart__added}
               onClick={handleAddToCart}
             >
               Added
             </button>
+          ) : (
+            <button
+              type="button"
+              className={productCard.card__buttons_cart}
+              onClick={handleAddToCart}
+            >
+              Add to cart
+            </button>
           )}
-          <button
-            type="button"
-            className={classNames(
-              'card__buttons-fav',
-              { 'card__buttons-fav--added': addToFavorites }
-            )}
-            onClick={handleAddToFavorites}
-          >
-          </button>
+          {addToFavorites ? (
+            <button
+              type="button"
+              className={productCard.card__buttons_fav__added}
+              onClick={handleAddToFavorites}
+            >
+            </button>
+          ) : (
+            <button
+              type="button"
+              className={productCard.card__buttons_fav}
+              onClick={handleAddToFavorites}
+            >
+            </button>
+          )}
         </div>
       </div>
     </section>
