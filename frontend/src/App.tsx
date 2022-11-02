@@ -1,12 +1,9 @@
 import './App.css';
-import { ProductCard } from './components/ProductCard';
-
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 // import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
 import './App.css';
-// import { MainNav } from './components/MainNav';
 import { Header } from './components/Header/header';
 import { AccessoriesPage } from './pages/AccessoriesPage';
 import { CatalogPage } from './pages/CatalogPage';
@@ -16,20 +13,35 @@ import { TabletsPage } from './pages/TabletsPage';
 import { productT } from './types/productT';
 
 import { getAll } from '../src/api/products';
+import { CartPage } from './pages/CartPage';
+import { phones } from './phones/phones_data';
 
 const App: React.FC = () => {
   const [products, setProducts] = useState<productT[]>([]);
+  const [productsInCart, setProductsInCart] = useState<productT[]>([]);
+
 
   useEffect(() => {
-    getAll().then((data) => {
-      setProducts(data);
+    getAll()
+      .then((data) => {
+        setProducts(data);
+      });
+    [...products].forEach(product => {
+      product.inCart = false;
+      product.isFavorite= false;
     });
+    
   }, []);
+
+  const addOrRemoveCart = (id: number) => {
+    products[id].inCart = !products[id].inCart;
+    setProductsInCart([...products].filter(product => product.inCart = true));
+    console.log(products[id]);
+  };
 
 
   return (
     <>
-      {/* <MainNav /> */}
       <Header/>
       <div className="section">
         <div className="container">
@@ -42,7 +54,12 @@ const App: React.FC = () => {
             <Route path="home" element={<Navigate to="/" replace />} />
 
             <Route path="phones">
-              <Route index element={<CatalogPage products={products}/>} />
+              <Route index element={
+                <CatalogPage 
+                  products={products} 
+                  addOrRemoveCart={addOrRemoveCart}
+                />
+              } />
               <Route path=":idPhone" element={<PhoneCardPage />} />
             </Route>
             <Route path="tablets">
@@ -50,6 +67,9 @@ const App: React.FC = () => {
             </Route>
             <Route path="accessories">
               <Route index element={<AccessoriesPage />} />
+            </Route>
+            <Route path="cart">
+              <Route index element={<CartPage products={productsInCart} />} />
             </Route>
           </Routes>
         </div>

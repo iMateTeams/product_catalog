@@ -32,7 +32,7 @@ export const PaginationPerPage: React.FC<Props> = ({
           }}
         >
           <option value="10" className="pagination_page--option">10</option>
-          <option value="16" className="pagination_page--option" selected>16</option>
+          <option value="16" className="pagination_page--option">16</option>
           <option value="32" className="pagination_page--option">32</option>
           <option value="50" className="pagination_page--option">50</option>
           <option value={amountPhones} className="pagination_page--option">ALL</option>
