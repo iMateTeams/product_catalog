@@ -7,18 +7,18 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 // import { Counter } from './features/counter/Counter';
 import './App.css';
 // import { MainNav } from './components/MainNav';
-import { Header } from './components/Header/header';
+import { Header } from './components/Header';
 import { AccessoriesPage } from './pages/AccessoriesPage';
 import { CatalogPage } from './pages/CatalogPage';
 import { Home } from './pages/Home';
 import { PhoneCardPage } from './pages/PhoneCardPage';
 import { TabletsPage } from './pages/TabletsPage';
-import { productT } from './types/productT';
+import { Product } from './types/Product';
 
 import { getAll } from '../src/api/products';
 
 const App: React.FC = () => {
-  const [products, setProducts] = useState<productT[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     getAll().then((data) => {

@@ -1,4 +1,4 @@
-export interface productT {
+export interface Product {
   id: string;
   category: string;
   phoneId: string;
