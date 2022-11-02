@@ -7,7 +7,10 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 // import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
 import './App.css';
-import { Header } from './components/Header';
+// import { MainNav } from './components/MainNav';
+import { Header } from './components/Header/header';
+import { BurgerMenu } from './components/BurgerMenu/burger-menu';
+
 import { AccessoriesPage } from './pages/AccessoriesPage';
 import { CatalogPage } from './pages/CatalogPage';
 import { Home } from './pages/Home';
@@ -23,6 +26,7 @@ const App: React.FC = () => {
 
   const [products, setProducts] = useState<Product[]>([]);
   const [productsInCart, setProductsInCart] = useState<Product[]>([]);
+  const [burgerActive, setBurgerActive] = useState(false);
 
   useEffect(() => {
     getAll()
@@ -45,7 +49,9 @@ const App: React.FC = () => {
 
   return (
     <>
-      <Header/>
+      {/* <MainNav /> */}
+      <Header onClick={() => setBurgerActive(!burgerActive)} clicked={burgerActive}/>
+      <BurgerMenu burgerActive={burgerActive}/>
       <div className="section">
         <div className="container">
           <Routes>

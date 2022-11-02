@@ -13,7 +13,7 @@ export const PageNavLink: React.FC<Props> = ({
   <NavLink
     to={to}
     className={({ isActive }) => classNames(
-      'desktop-menu__link',
+      'menu__link',
       { 'is-active': isActive },
     )}
   >
