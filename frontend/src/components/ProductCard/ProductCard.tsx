@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import './ProductCard.scss';
-import { productT } from '../../types/productT';
+import { Product } from '../../types/Product';
 
 type Props = {
-  product: productT;
+  product: Product;
 }
 
 export const ProductCard: React.FC<Props> = ({ product }) => {
