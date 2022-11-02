@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { productT } from '../types/productT';
+import { Product } from '../types/Product';
 import styleCart from './styles/CartPage.module.scss';
 import arrow_left from '../images/ArrowLeft.svg';
 import imgPh from '../../src/img/phones/apple-iphone-7/black/00.jpg';
 
 
 type Props = {
-  products: productT[];
+  products: Product[];
 }
 
 export const CartPage: React.FC<Props> = ({ products }) => {
