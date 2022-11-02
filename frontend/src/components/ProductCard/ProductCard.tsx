@@ -4,11 +4,7 @@ import './ProductCard.scss';
 import { Product } from '../../types/Product';
 
 type Props = {
-<<<<<<< HEAD
-  product: productT;
-=======
   product: Product;
->>>>>>> 08bd061439f239fa0e8d7e091f58980f9b50cf1e
   addOrRemoveCart: (id: number) => void;
   
 }
