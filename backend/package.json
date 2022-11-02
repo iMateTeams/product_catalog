@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "product catalog backend",
-  "main": "index.s",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/index.ts",
@@ -19,12 +19,12 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "postgres": "^3.3.1"
+    "postgres": "^3.3.1",
+    "cors": "^2.8.5"
   },
   "devDependencies": {
     "@types/node": "^18.11.8",
     "@typescript-eslint/eslint-plugin": "^5.41.0",
-    "cors": "^2.8.5",
     "eslint": "^8.26.0",
     "eslint-config-standard-with-typescript": "^23.0.0",
     "eslint-plugin-import": "^2.26.0",
