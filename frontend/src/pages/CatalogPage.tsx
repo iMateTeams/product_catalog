@@ -6,16 +6,24 @@ import { phones } from '../phones/phones_data';
 import { Product } from '../types/Product';
 import phonePage from './styles/CatalogPage.module.scss';
 import home from '../images/home.svg';
+
 import arrow_right from '../images/ArrowRight.svg';
 
 type Props = {
   products: Product[];
+  addOrRemoveCart: (id: number) => void;
 }
 
-export const CatalogPage: React.FC<Props> = ({ products }) => {
+export const CatalogPage: React.FC<Props> = ({ products , addOrRemoveCart }) => {
+
   const [currentPage, setCurrentPage] = useState(1);
   const [phonesPerPage, setPhonesPerPage] = useState(16);
   const [visiblePhones, setVisiblePhones] = useState(products.slice(0,phonesPerPage));
+ 
+
+  // console.log(products);
+  // console.log(visiblePhones);
+ 
 
   useEffect(() => {
     const lastPhoneIndex = currentPage * phonesPerPage; 
@@ -55,7 +63,11 @@ export const CatalogPage: React.FC<Props> = ({ products }) => {
         <div className={phonePage.phones__cards}>
           {visiblePhones.map(product => {
             return (
-              <ProductCard product={product} key={product.id}/>
+              <ProductCard 
+                product={product} 
+                addOrRemoveCart={addOrRemoveCart}
+                key={product.id}
+              />
             );
           }
           )}

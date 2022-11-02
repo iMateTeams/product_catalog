@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import logo from '../../images/headerLogo.svg';
 import './main.scss';
 import { PageNavLink } from './PageNavLink';
@@ -37,7 +38,7 @@ export const Header = () => (
       </div>
 
       <div className="header__beg-box">
-        <a href="#beg" className="header__beg"></a>
+        <NavLink to="cart" className="header__beg"/>
       </div>
     </div>
 

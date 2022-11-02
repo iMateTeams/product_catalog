@@ -86,7 +86,6 @@ export const PaginationButtons: React.FC<Props> = ({
               >
                 <button 
                   className="pagination_button"
-                  disabled={page === currentPage}
                 >
                   <a
                     data-cy="pageLink"

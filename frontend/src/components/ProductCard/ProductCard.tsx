@@ -5,9 +5,11 @@ import { Product } from '../../types/Product';
 
 type Props = {
   product: Product;
+  addOrRemoveCart: (id: number) => void;
+  
 }
 
-export const ProductCard: React.FC<Props> = ({ product }) => {
+export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart }) => {
   const {
     id,
     category,
@@ -22,14 +24,10 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
     ram,
     year,
     image,
+    inCart,
   } = product;
 
-  const [addToCart, setAddToCart] = useState(false);
   const [addToFavorites, setAddToFavorites] = useState(false);
-
-  const handleAddToCart = () => {
-    setAddToCart(prevState => !prevState);
-  };
 
   const handleAddToFavorites = () => {
     setAddToFavorites(prevState => !prevState);
@@ -90,21 +88,21 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
           </div>
         </div>
         <div className="card__buttons">
-          {addToCart ? (
+          {!inCart ? (
             <button
               type="button"
               className="card__buttons-cart"
-              onClick={handleAddToCart}
+              onClick={() => addOrRemoveCart(+product.id)}
             >
-              Add to cart
+              Added
             </button>
           ) : (
             <button
               type="button"
               className="card__buttons-cart card__buttons-cart--added"
-              onClick={handleAddToCart}
+              onClick={() => addOrRemoveCart(+product.id)}
             >
-              Added
+             Add to cart
             </button>
           )}
           <button
