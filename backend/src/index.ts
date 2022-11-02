@@ -13,11 +13,9 @@ app.use('/', (req, res, next) => {
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   next();
 
-  // get data from phones,json
-
   app.use(cors());
 
-  app.use(express.static('./data/'));
+  app.use(express.static('./public/'));
   
   app.get('/products', (req, res) => {
     const phones = fs.readFileSync('./data/phones.json', 'utf-8');
