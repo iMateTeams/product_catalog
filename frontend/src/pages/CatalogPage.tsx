@@ -3,14 +3,14 @@ import { PaginationButtons } from '../components/Pagination/PaginationButtons';
 import { PaginationPerPage } from '../components/Pagination/PaginationPerPage';
 import { ProductCard } from '../components/ProductCard';
 import { phones } from '../phones/phones_data';
-import { productT } from '../types/productT';
+import { Product } from '../types/Product';
 import phonePage from './styles/CatalogPage.module.scss';
 import home from '../images/home.svg';
 
 import arrow_right from '../images/ArrowRight.svg';
 
 type Props = {
-  products: productT[];
+  products: Product[];
   addOrRemoveCart: (id: number) => void;
 }
 

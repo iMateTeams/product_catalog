@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import './ProductCard.scss';
-import { productT } from '../../types/productT';
+import { Product } from '../../types/Product';
 
 type Props = {
+<<<<<<< HEAD
   product: productT;
+=======
+  product: Product;
+>>>>>>> 08bd061439f239fa0e8d7e091f58980f9b50cf1e
   addOrRemoveCart: (id: number) => void;
   
 }
@@ -33,12 +37,22 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart }) => {
     setAddToFavorites(prevState => !prevState);
   };
 
-  const imgSrc = `../../img/${image}`;
+  const [img, setImg] = useState('');
+
+  useEffect(() => {
+    fetch(`http://localhost:4000/${image}`)
+      .then(response => response.blob())
+      .then(blob => {
+        const url = URL.createObjectURL(blob);
+        setImg(url);
+      });
+  }, [image]);
+
 
   return (
     <section className="card">
       <div className="card__content">
-        <img src='imgSrc' alt="phoneImage" className="card__image" />
+        <img src={img}  alt="phoneImage" className="card__image" />
         <div className="card__name">
           {name}
           Apple iPhone Xs 64GB Silver (iMT9G2FS/A)

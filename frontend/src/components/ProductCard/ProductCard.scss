@@ -29,7 +29,8 @@
 
   &__image {
     height: 196px;
-    width: 208px;
+    width: 100%;
+    object-fit: contain;
     margin-bottom: 24px;
   }
 

@@ -4,22 +4,22 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 // import logo from './logo.svg';
 // import { Counter } from './features/counter/Counter';
 import './App.css';
-import { Header } from './components/Header/header';
+import { Header } from './components/Header';
 import { AccessoriesPage } from './pages/AccessoriesPage';
 import { CatalogPage } from './pages/CatalogPage';
 import { Home } from './pages/Home';
 import { PhoneCardPage } from './pages/PhoneCardPage';
 import { TabletsPage } from './pages/TabletsPage';
-import { productT } from './types/productT';
+import { Product } from './types/Product';
 
 import { getAll } from '../src/api/products';
 import { CartPage } from './pages/CartPage';
 import { phones } from './phones/phones_data';
 
 const App: React.FC = () => {
-  const [products, setProducts] = useState<productT[]>([]);
-  const [productsInCart, setProductsInCart] = useState<productT[]>([]);
 
+  const [products, setProducts] = useState<Product[]>([]);
+  const [productsInCart, setProductsInCart] = useState<Product[]>([]);
 
   useEffect(() => {
     getAll()
