@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import productCard from '../ProductCard/ProductCard.module.scss';
-import { Product } from '../../types/Product';
 import classNames from 'classnames';
+import productCard from './ProductCard.module.scss';
+import { Product } from '../../types/Product';
 
 type Props = {
   product: Product;

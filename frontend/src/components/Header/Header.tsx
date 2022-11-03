@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 import logo from '../../images/headerLogo.svg';
-import './Main.scss';
+import styles from './Header.module.scss';
 import { PageNavLink } from '../PageNavLink/PageNavLink';
 
 type Props = {
@@ -11,56 +11,54 @@ type Props = {
 
 export const Header: React.FC<Props> = ({ onClick, clicked }) => {
   return (
-    <header className="header">
-      <div className="header__logo-n-nav">
-        <a href="#" className="header__logo-link">
+    <header className={styles.header}>
+      <div className={styles.header__logo_n_nav}>
+        <a href="#" className={styles.header__logo_link}>
           <img
-            className="header__logo"
+            className={styles.header__logo}
             src={logo}
             alt="logo"
           ></img>
         </a>
 
-        <nav className="menu">
-          <ul className="menu__list">
-            <li className="menu__item" >
+        <nav className={styles.menu}>
+          <ul className={styles.menu__list}>
+            <li className={styles.menu__item} >
               <PageNavLink to="/" textLink="Home" />
             </li>
-            <li className="menu__item">
+            <li className={styles.menu__item}>
               <PageNavLink to="phones" textLink="Phones" />
             </li>
-            <li className="menu__item">
+            <li className={styles.menu__item}>
               <PageNavLink to="tablets" textLink="Tablets" />
             </li>
-            <li className="menu__item">
+            <li className={styles.menu__item}>
               <PageNavLink to="accessories" textLink="accessories" />
             </li>
           </ul>
         </nav>
       </div>
 
-      <div className="header__link-n-beg">
-        <div className="header__liked-box">
-          <NavLink to="favorits" className="header__liked"/>
+      <div className={styles.header__link_n_beg}>
+        <div className={styles.header__liked_box}>
+          <NavLink to="liked" className={styles.header__liked} />
         </div>
 
-        <div className="header__beg-box">
-          <NavLink to="cart" className="header__beg"/>
+        <div className={styles.header__beg_box}>
+          <NavLink to="cart" className={styles.header__beg} />
         </div>
       </div>
 
     
-      <div className="header__menu-opener-box">
+      <div className={styles.header__menu_opener_box}>
         <div 
           onClick={onClick} 
           className={classNames(
-            'header__menu-opener',
-            {'header__menu-opener--clicked' : clicked}
+            styles.header__menu_opener,
+            { [styles.header__menu_opener__clicked]: clicked }
           )}
         ></div>
       </div>
     </header>
   );
 };
-
-// dasdas

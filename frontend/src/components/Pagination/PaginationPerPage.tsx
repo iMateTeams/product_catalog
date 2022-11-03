@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../components/Pagination/Pagination.scss';
+import styles from './Pagination.module.scss';
 
 
 type Props = {
@@ -19,23 +19,23 @@ export const PaginationPerPage: React.FC<Props> = ({
 
   return(
     <div>
-      <p className='pagination_title'>
+      <p className={styles.pagination_title}>
         Items on page
       </p>
-      <div className="pagination_box">
+      <div className={styles.pagination_box}>
         <select
-          className="pagination_page"
+          className={styles.pagination_page}
           value={phonesPerPage}
           onChange={event => {
             setPhonesPerPage(+event.target.value);
             setCurrentPage(1);
           }}
         >
-          <option value="10" className="pagination_page--option">10</option>
-          <option value="16" className="pagination_page--option">16</option>
-          <option value="32" className="pagination_page--option">32</option>
-          <option value="50" className="pagination_page--option">50</option>
-          <option value={dataAmount} className="pagination_page--option">ALL</option>
+          <option value="10" className={styles.pagination_page__option}>10</option>
+          <option value="16" className={styles.pagination_page__option}>16</option>
+          <option value="32" className={styles.pagination_page__option}>32</option>
+          <option value="50" className={styles.pagination_page__option}>50</option>
+          <option value={dataAmount} className={styles.pagination_page__option}>ALL</option>
         </select>
       </div>
     </div>

@@ -1,0 +1,90 @@
+@import '../../utils/vars.scss';
+
+.pagination {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+
+  &_box {
+    background-color: $white-color;
+    border: 1px solid $icons-color-gray;
+
+    &:hover {
+      outline: none;
+      border: 1px solid $secondary-color-gray;
+    }
+  
+    &:focus {
+      outline: none;
+      border: 1px solid $primary-color-black;
+    }
+  }
+
+  &_title {
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 15px;
+    color: $secondary-color-gray;
+    margin-bottom: 4px;
+  }
+
+  &_page {
+    box-sizing: border-box;
+    width: 128px;
+    height: 40px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: $secondary-color-gray;
+    margin-right: 12px;
+    padding: 12px;
+    outline: none;
+    border: 0px;
+  }
+
+  &_link {
+    display: block;
+    text-decoration: none;
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 30px;
+    color: $primary-color-black;
+    transition:color 0,5s;
+    &:hover {
+      color: $white-color;
+    }
+  }
+
+  &_list {
+    text-decoration: none;
+  }
+
+  &_button {
+    padding: 0;
+    background-color: $white-color;
+    border: 1px solid $elements-color-light-gray;
+    width: 32px;
+    height: 32px;
+    margin: 0 2px;
+    transition: background-color 0.5s;
+
+    &__left_right {
+      margin: 0 14px;
+      border: 1px solid $icons-color-gray;
+    }
+    &:hover {
+      background-color: $primary-color-black;
+    }
+  }
+  &_active {
+    background-color: $primary-color-black;
+    color: $white-color;
+  }
+  &_disabled :hover{
+    background-color: $white-color;
+    color: $primary-color-black;
+  }
+}

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
+import styles from '../Header/Header.module.scss';
 
 type Props = {
   to: string;
@@ -13,8 +14,8 @@ export const PageNavLink: React.FC<Props> = ({
   <NavLink
     to={to}
     className={({ isActive }) => classNames(
-      'menu__link',
-      { 'is-active': isActive },
+      styles.menu__link,
+      { [styles.is_active]: isActive },
     )}
   >
     {textLink}

@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import classNames from 'classnames';
-import '../Header/Main.scss';
+import styles from '../Header/Header.module.scss';
 import { PageNavLink } from '../PageNavLink/PageNavLink';
 
 
@@ -24,33 +24,33 @@ export const BurgerMenu: React.FC<Props> = ({ onClick, clicked }) => {
 
   return (
     <nav className={classNames(
-      'burger-menu',
-      {'burger-menu--active' : clicked},
+      styles.burger_menu,
+      { [styles.burger_menu__active] : clicked },
     )} 
     onClick={onClick}
     >
-      <div className='burger-menu__container'>
-        <ul className="burger-menu__list">
-          <li className="burger-menu__item">
+      <div className={styles.burger_menu__container}>
+        <ul className={styles.burger_menu__list}>
+          <li className={styles.burger_menu__item}>
             <PageNavLink to="/" textLink="Home" />
           </li>
-          <li className="burger-menu__item">
+          <li className={styles.burger_menu__item}>
             <PageNavLink to="phones" textLink="Phones" />
           </li>
-          <li className="burger-menu__item">
+          <li className={styles.burger_menu__item}>
             <PageNavLink to="tablets" textLink="Tablets" />
           </li>
-          <li className="burger-menu__item">
+          <li className={styles.burger_menu__item}>
             <PageNavLink to="accessories" textLink="accessories" />
           </li>
         </ul>
 
-        <div className="burger-menu__liked-n-beg">
-          <div className="burger-menu__liked-box">
+        <div className={styles.burger_menu__liked_n_beg}>
+          <div className={styles.burger_menu__liked_box}>
             <NavLink to="liked" className="burger-menu__liked"/>
           </div>
 
-          <div className="burger-menu__beg-box">
+          <div className={styles.burger_menu__beg_box}>
             <NavLink to="cart" className="burger-menu__beg"/>
           </div>
         </div>

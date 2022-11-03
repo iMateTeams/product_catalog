@@ -1,3 +1,6 @@
+@import "../../utils/mixins.scss";
+@import "../BurgerMenu/BurgerMenu.module.scss";
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -10,7 +13,7 @@
   box-shadow: 0px 1px 0px #E2E6E9;
   z-index: 3;
 
-  &__logo-link {
+  &__logo_link {
     display: flex;
     align-self: center;
     width: 64px;
@@ -38,7 +41,7 @@
     }
   }
 
-  &__link-n-beg {
+  &__link_n_beg {
     display: none;
 
     @include onTablet {
@@ -47,12 +50,12 @@
     }
   }
 
-  &__logo-n-nav {
+  &__logo_n_nav {
     display: flex;
     flex-direction: row;
   }
 
-  &__liked-box {
+  &__liked_box {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -69,7 +72,7 @@
   &__liked {
     width: 14px;
     height: 14px;
-    background-image: url(../../../images/liked.svg);
+    background-image: url(../../images/liked.svg);
     background-repeat: no-repeat;
     background-size: cover;
     transition: 0.3s;
@@ -80,7 +83,7 @@
   }
 
   
-  &__beg-box {
+  &__beg_box {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -97,7 +100,7 @@
   &__beg {
     width: 14px;
     height: 14px;
-    background-image: url(../../../images/beg.svg);
+    background-image: url(../../images/beg.svg);
     background-repeat: no-repeat;
     background-size: cover;
     transition: 0.3s;
@@ -107,7 +110,7 @@
     }
   }
 
-  &__menu-opener-box {
+  &__menu_opener_box {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -120,20 +123,90 @@
     }
   }
   
-  &__menu-opener {
+  &__menu_opener {
     width: 14px;
     height: 14px;
-    background-image: url(../../../images/menuIcon.svg);
+    background-image: url(../../images/menuIcon.svg);
     background-repeat: no-repeat;
     background-size: cover;
     transition: 0.3s;
 
-    &--clicked {
-      background-image: url(../../../images/cross.svg);
+    &__clicked {
+      background-image: url(../../images/cross.svg);
     }
   }
 
-  &__menu-opener:hover {
+  &__menu_opener:hover {
     transform: scale(1.1);
+  }
+}
+
+.menu {
+  display: none;
+
+  @include onTablet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    width: 100%;
+    padding-right: 32px;
+
+    &:last-child {
+      padding-right: 0;
+    }
+
+    @include onDesktop {
+      padding-right: 64px;
+    }
+  }
+
+  &__link {
+    position: relative;
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 12px;
+    line-height: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #89939A;
+    text-decoration: none;
+
+    &:hover {
+      color: #313237;
+
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: -8px;
+        width: 100%;
+        height: 2px;
+        background-color: #313237;
+
+        @include onTablet {
+          bottom: -18.5px;
+        }
+
+
+        @include onDesktop {
+          bottom: -26.5px;
+        }
+      }
+    }
   }
 }

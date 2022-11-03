@@ -7,7 +7,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import './App.css';
 
-import { Footer } from './components/Footer/Footer';
+import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
 
 import { AccessoriesPage } from './pages/AccessoriesPage';

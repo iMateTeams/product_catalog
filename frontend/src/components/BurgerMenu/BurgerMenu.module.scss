@@ -1,4 +1,4 @@
-.burger-menu {
+.burger_menu {
   display: flex;
   justify-content: center;
   padding-top: 32px;
@@ -9,7 +9,7 @@
   z-index: 2;
   left: -100%;
 
-  &--active {
+  &__active {
     left: 0;
   }
 
@@ -41,14 +41,14 @@
     }
   }
 
-  &__liked-n-beg {
+  &__liked_n_beg {
     display: flex;
     flex-direction: row;
     margin: 0;
     padding-bottom: 30px;
   }
 
-  &__liked-box {
+  &__liked_box {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,7 +83,7 @@
   }
 
   
-  &__beg-box {
+  &__beg_box {
     display: flex;
     justify-content: center;
     align-items: center;
