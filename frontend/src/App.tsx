@@ -1,6 +1,6 @@
 import './App.css';
 import { ProductCard } from './components/ProductCard';
-import { Header } from './components/Header/header';
+import { Header } from './components/Header/';
 
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
