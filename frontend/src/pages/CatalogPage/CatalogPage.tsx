@@ -16,6 +16,7 @@ type Props = {
   setPhonesPerPage: (num: number) => void;
   addOrRemoveCart: (id: number) => void;
   dataAmount: number;
+  addOrRemoveLiked: (id: number) => void;
 };
 
 export const CatalogPage: React.FC<Props>
@@ -27,6 +28,7 @@ export const CatalogPage: React.FC<Props>
     setPhonesPerPage,
     addOrRemoveCart,
     dataAmount,
+    addOrRemoveLiked,
   }) => {
 
     return (
@@ -62,6 +64,7 @@ export const CatalogPage: React.FC<Props>
                 <ProductCard
                   product={product}
                   addOrRemoveCart={addOrRemoveCart}
+                  addOrRemoveLiked={addOrRemoveLiked}
                   key={product.id}
                 />
               );

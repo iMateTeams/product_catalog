@@ -6,10 +6,10 @@ import { Product } from '../../types/Product';
 type Props = {
   product: Product;
   addOrRemoveCart: (id: number) => void;
-  
+  addOrRemoveLiked: (id: number) => void;
 }
 
-export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart }) => {
+export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart, addOrRemoveLiked }) => {
   const {
     id,
     name,
@@ -20,6 +20,7 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart }) => {
     ram,
     image,
     inCart,
+    liked,
   } = product;
 
   const [addToFavorites, setAddToFavorites] = useState(false);
@@ -31,7 +32,8 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart }) => {
   const [img, setImg] = useState('');
 
   useEffect(() => {
-    fetch(`https://i-mate-teams-product-catalog.herokuapp.com/${image}`)
+    // fetch(`https://i-mate-teams-product-catalog.herokuapp.com/${image}`)
+    fetch(`http://localhost:4002/${image}`)
       .then(response => response.blob())
       .then(blob => {
         const url = URL.createObjectURL(blob);
@@ -43,7 +45,7 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart }) => {
   return (
     <section className="card">
       <div className="card__content">
-        <img src={img}  alt="phoneImage" className="card__image" />
+        <img src={img} alt="phoneImage" className="card__image" />
         <div className="card__name">
           {name}
         </div>
@@ -96,18 +98,25 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart }) => {
               className="card__buttons-cart"
               onClick={() => addOrRemoveCart(+product.id)}
             >
-             Add to cart
+              Add to cart
             </button>
           )}
-          <button
-            type="button"
-            className={classNames(
-              'card__buttons-fav',
-              { 'card__buttons-fav--added': addToFavorites }
-            )}
-            onClick={handleAddToFavorites}
-          >
-          </button>
+
+          {liked ? (
+            <button
+              type="button"
+              className={'card__buttons-fav card__buttons-fav--added'}
+              onClick={() => addOrRemoveLiked(+product.id)}
+            >
+            </button>
+          ) : (
+            <button
+              type="button"
+              className={'card__buttons-fav'}
+              onClick={() => addOrRemoveLiked(+product.id)}
+            >
+            </button>
+          )}
         </div>
       </div>
     </section>

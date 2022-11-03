@@ -41,7 +41,7 @@ export const Header: React.FC<Props> = ({ onClick, clicked }) => {
 
       <div className="header__link-n-beg">
         <div className="header__liked-box">
-          <NavLink to="liked" className="header__liked"/>
+          <NavLink to="favorits" className="header__liked"/>
         </div>
 
         <div className="header__beg-box">

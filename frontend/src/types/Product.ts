@@ -14,4 +14,5 @@ export interface Product {
   image: string;
   inCart?: boolean;
   isFavorite?: boolean;
+  liked?: boolean;
 }

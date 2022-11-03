@@ -56,11 +56,27 @@ const App: React.FC = () => {
       return product;
     });
 
-    update(id, newProducts.find(product => +product.id === id));
+    update(id, { inCart: newProducts.find(product => +product.id === id)?.inCart });
 
     setProducts(newProducts);
   };
 
+  const addOrRemoveLiked = (id: number) => {
+    const newProducts = products.map((product) => {
+      if (+product.id === id) {
+        return {
+          ...product,
+          liked: !product.liked || false,
+        };
+      }
+
+      return product;
+    });
+
+    update(id, { liked: newProducts.find(product => +product.id === id)?.liked });
+
+    setProducts(newProducts);
+  };
 
   return (
     <>
@@ -87,6 +103,7 @@ const App: React.FC = () => {
                   setPhonesPerPage={setPhonesPerPage}
                   addOrRemoveCart={addOrRemoveCart}
                   dataAmount={dataAmount}
+                  addOrRemoveLiked={addOrRemoveLiked}
                 />
               }
               />
@@ -101,6 +118,9 @@ const App: React.FC = () => {
             <Route path="cart">
               <Route index element={<div />} />
             </Route>
+            {/* <Route path="favorites">
+              <Route index element={<Favorites />} />
+            </Route> */}
           </Routes>
         </div>
       </div>
