@@ -6,15 +6,29 @@ import { PageNavLink } from '../Header/PageNavLink';
 
 
 type Props = {
-  burgerActive: boolean,
+  onClick: React.MouseEventHandler<HTMLDivElement>;
+  clicked: boolean,
 };
 
-export const BurgerMenu: React.FC<Props> = ({ burgerActive }) => {
+export const BurgerMenu: React.FC<Props> = ({ onClick, clicked }) => {
+
+  const scrollLock = () => {
+    if (clicked) {
+      window.document.body.style.overflow = 'hidden';
+    } else {
+      window.document.body.style.overflow = 'auto';
+    }
+  };
+
+  scrollLock();
+
   return (
     <nav className={classNames(
       'burger-menu',
-      {'burger-menu--active' : burgerActive},
-    )}>
+      {'burger-menu--active' : clicked},
+    )} 
+    onClick={onClick}
+    >
       <div className='burger-menu__container'>
         <ul className="burger-menu__list">
           <li className="burger-menu__item">

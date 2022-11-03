@@ -23,7 +23,7 @@ export const Header: React.FC<Props> = ({ onClick, clicked }) => {
 
         <nav className="menu">
           <ul className="menu__list">
-            <li className="menu__item">
+            <li className="menu__item" >
               <PageNavLink to="/" textLink="Home" />
             </li>
             <li className="menu__item">

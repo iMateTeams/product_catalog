@@ -51,7 +51,7 @@ const App: React.FC = () => {
     <>
       {/* <MainNav /> */}
       <Header onClick={() => setBurgerActive(!burgerActive)} clicked={burgerActive}/>
-      <BurgerMenu burgerActive={burgerActive}/>
+      <BurgerMenu onClick={() => setBurgerActive(!burgerActive)} clicked={burgerActive}/>
       <div className="section">
         <div className="container">
           <Routes>
