@@ -2,7 +2,6 @@ import styleCart from './CartPage.module.scss';
 import React, { useEffect, useState } from 'react';
 import { Product } from '../../types/Product';
 import arrow_left from '../../images/ArrowLeft.svg';
-import imgPh from '../../images/00.jpg';
 
 
 // type Props = {
