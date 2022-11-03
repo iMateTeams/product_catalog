@@ -1,6 +1,6 @@
 import './App.css';
 import { ProductCard } from './components/ProductCard';
-import { Header } from './components/Header/Header';
+import { Header } from './components/Header/header';
 
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
@@ -19,7 +19,6 @@ import { TabletsPage } from './pages/TabletsPage';
 import { Product } from './types/Product';
 
 import { getPart, update } from '../src/api/products';
-import { CartPage } from './pages/CartPage';
 
 const App: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -100,7 +99,7 @@ const App: React.FC = () => {
               <Route index element={<AccessoriesPage />} />
             </Route>
             <Route path="cart">
-              <Route index element={<CartPage />} />
+              <Route index element={<div />} />
             </Route>
           </Routes>
         </div>
