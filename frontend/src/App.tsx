@@ -1,6 +1,6 @@
 import './App.css';
 import { ProductCard } from './components/ProductCard';
-import { Footer } from './components/Footer';
+import { Header } from './components/Header/Header';
 
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
@@ -8,7 +8,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 // import { Counter } from './features/counter/Counter';
 import './App.css';
 // import { MainNav } from './components/MainNav';
-import { Header } from './components/Header';
+import { Footer } from './components/Footer/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
 
 import { AccessoriesPage } from './pages/AccessoriesPage';

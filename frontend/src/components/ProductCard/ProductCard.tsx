@@ -31,7 +31,7 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart }) => {
   const [img, setImg] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:4000/${image}`)
+    fetch(`https://i-mate-teams-product-catalog.herokuapp.com/${image}`)
       .then(response => response.blob())
       .then(blob => {
         const url = URL.createObjectURL(blob);
@@ -85,7 +85,7 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart }) => {
           {inCart ? (
             <button
               type="button"
-              className="card__buttons-cart"
+              className="card__buttons-cart card__buttons-cart--added"
               onClick={() => addOrRemoveCart(+product.id)}
             >
               Added
@@ -93,7 +93,7 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart }) => {
           ) : (
             <button
               type="button"
-              className="card__buttons-cart card__buttons-cart--added"
+              className="card__buttons-cart"
               onClick={() => addOrRemoveCart(+product.id)}
             >
              Add to cart
