@@ -1,0 +1,102 @@
+@import '../../utils/mixins.scss';
+@import '../../utils/container.scss';
+@import '../../utils/vars.scss';
+
+.page {
+  margin: 40px 16px;
+  @include onTablet {
+    margin: 40px 24px;
+  }
+  @include onDesktop {
+    margin: 40px auto;
+  }
+  max-width: 1136px;
+  &_nav {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    &__img {
+      height: 12px;
+      margin-right: 10px;
+    }
+    &__title {
+      font-weight: 600;
+      font-size: 12px;
+      color: $secondary-color-gray;
+    }
+  }
+  &_cart{
+    display: block;
+  }
+}
+.cart {
+  &_box {
+    padding: 16px;
+    border: 1px solid 
+  }
+  &_list {
+    padding: 0;
+  
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  &_product {
+    display: block;
+    &__del {
+      width: 10px;
+      height: 10px;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      margin-right: 19px;
+    }
+    &__img {
+      width: 66px;
+      height: 66px;
+      object-fit: contain;
+      margin-right: 23px;
+    }
+    &__name {
+      font-style: normal;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 21px;
+    }
+    &__first {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__second {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__count_box {
+      display: flex;
+
+    }
+    &__button {
+      border: 1px solid #E2E6E9;
+      width: 32px;
+      height: 32px;
+    }
+
+    &__count {
+      width: 32px;
+      height: 32px;
+      color: $primary-color-blackAll;
+      text-align: center;
+      font-size: 14px;
+      line-height: 32px;
+    }
+    &__total {
+      width: 51px;
+      height: 31px;
+      font-family: 'Mont';
+      font-style: normal;
+      font-weight: 800;
+      font-size: 22px;
+      line-height: 31px;
+    }
+  }
+}

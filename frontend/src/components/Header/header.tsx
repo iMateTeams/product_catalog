@@ -1,8 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import classNames from 'classnames';
 import logo from '../../images/headerLogo.svg';
-import './main.scss';
-import { PageNavLink } from './PageNavLink';
+import './Main.scss';
+import { PageNavLink } from '../PageNavLink/PageNavLink';
 
 type Props = {
   onClick: React.MouseEventHandler<HTMLDivElement>;

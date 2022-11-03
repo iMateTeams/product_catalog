@@ -3,14 +3,14 @@ import '../../components/Pagination/Pagination.scss';
 
 
 type Props = {
-  amountPhones:number;
+  dataAmount: number;
   phonesPerPage: number
   setPhonesPerPage: (num: number) => void;
   setCurrentPage: (num: number) => void;
 }
 
 export const PaginationPerPage: React.FC<Props> = ({
-  amountPhones,
+  dataAmount,
   phonesPerPage,
   setPhonesPerPage,
   setCurrentPage,
@@ -35,7 +35,7 @@ export const PaginationPerPage: React.FC<Props> = ({
           <option value="16" className="pagination_page--option">16</option>
           <option value="32" className="pagination_page--option">32</option>
           <option value="50" className="pagination_page--option">50</option>
-          <option value={amountPhones} className="pagination_page--option">ALL</option>
+          <option value={dataAmount} className="pagination_page--option">ALL</option>
         </select>
       </div>
     </div>

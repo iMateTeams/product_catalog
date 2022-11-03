@@ -1,6 +1,13 @@
 import React from 'react';
 import logo from '../../images/headerLogo.svg';
-import styles from './footer.module.scss';
+import styles from './Footer.module.scss';
+
+const toTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth',
+  });
+};
 
 export const Footer: React.FC = () => {
   return (
@@ -30,7 +37,7 @@ export const Footer: React.FC = () => {
         </ul>
         <div className={styles.footer__back_top}>
           <p className={styles.footer__back_top_text}>Back to top</p>
-          <a className={styles.footer__back_top_link} href="/"></a>
+          <button className={styles.footer__back_top_link} onClick={toTop}></button>
         </div>
       </div>
     </div>

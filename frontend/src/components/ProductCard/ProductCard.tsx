@@ -12,17 +12,12 @@ type Props = {
 export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart }) => {
   const {
     id,
-    category,
-    phoneId,
-    itemId,
     name,
     fullPrice,
     price,
     screen,
     capacity,
-    color,
     ram,
-    year,
     image,
     inCart,
   } = product;
@@ -51,14 +46,13 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart }) => {
         <img src={img}  alt="phoneImage" className="card__image" />
         <div className="card__name">
           {name}
-          Apple iPhone Xs 64GB Silver (iMT9G2FS/A)
         </div>
         <div className="card__price">
           <div className="card__price-current">
             {`${price}€`}
           </div>
           <div className="card__price-full">
-            {fullPrice}
+            {`${fullPrice}€`}
           </div>
         </div>
         <div className="card__specs">
@@ -88,7 +82,7 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart }) => {
           </div>
         </div>
         <div className="card__buttons">
-          {!inCart ? (
+          {inCart ? (
             <button
               type="button"
               className="card__buttons-cart"

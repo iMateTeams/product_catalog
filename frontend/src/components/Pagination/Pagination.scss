@@ -13,12 +13,21 @@
     margin-bottom: 4px;
   }
   &_page {
-    width: 128px;
-    height: 40px;
-    &--option{
-      width: 128px;
-      height: 40px;
-      border: 1px solid #B4BDC4;
+    box-sizing: border-box;
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 15px;
+    color: #89939A;
+    margin-right: 8px;
+    background-color: #d3d5db;
+    border: 5px solid #d3d5db;
+    border-radius: 4px;
+    padding: 4px 8px;
+  
+    &:focus {
+      outline: none;
     }
   }
 
@@ -64,4 +73,3 @@
     color: #313237;
   }
 }
-

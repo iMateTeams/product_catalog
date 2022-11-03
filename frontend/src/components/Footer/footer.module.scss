@@ -1,5 +1,5 @@
-@import '../../pages/utils/mixins.scss';
-@import '../../pages/utils/vars.scss';
+@import '../../utils/mixins.scss';
+@import '../../utils/vars.scss';
 
 .footer {
   padding: 32px;
@@ -88,6 +88,16 @@
       width: 32px;
       height: 32px;
       display: block;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      transition: 0.3s;
+      cursor: pointer;
+      border: none;
+
+      &:hover {
+        transform: scale(1.4);
+      }
     }
   }
 }

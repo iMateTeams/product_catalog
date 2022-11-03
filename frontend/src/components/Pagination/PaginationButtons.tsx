@@ -1,14 +1,15 @@
 import classNames from 'classnames';
 import React from 'react';
 import '../../components/Pagination/Pagination.scss';
+import { Product } from '../../types/Product';
 
 
 
 type Props = {
-  amountPhones: number;
   phonesPerPage: number;
   currentPage: number;
   setCurrentPage: (page: number) => void;
+  dataAmount: number;
 };
 
 function getButtons(start: number, finish: number): number[] {
@@ -22,12 +23,12 @@ function getButtons(start: number, finish: number): number[] {
 }
 
 export const PaginationButtons: React.FC<Props> = ({
-  amountPhones,
   phonesPerPage,
   currentPage,
   setCurrentPage,
+  dataAmount,
 }) => {
-  const totalPages = Math.ceil(amountPhones / phonesPerPage);
+  const totalPages = Math.ceil(dataAmount / phonesPerPage);
 
 
   const handlePageNumberClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
@@ -42,6 +43,11 @@ export const PaginationButtons: React.FC<Props> = ({
     }
 
     setCurrentPage(nextPage);
+
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   return(

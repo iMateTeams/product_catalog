@@ -1,18 +1,18 @@
 @font-face {
   font-family: "Mont";
-  src: url(./fonts/Mont-Regular.ttf);
+  src: url(../../fonts/Mont-Regular.ttf);
   font-weight: 500;
 }
 
 @font-face {
   font-family: "Mont";
-  src: url(./fonts/Mont-Bold.ttf);
+  src: url(../../fonts/Mont-Bold.ttf);
   font-weight: 700;
 }
 
 @font-face {
   font-family: "Mont";
-  src: url(./fonts/Mont-SemiBold.ttf);
+  src: url(../../fonts/Mont-SemiBold.ttf);
   font-weight: 600;
 }
 
@@ -132,13 +132,13 @@
       width: 40px;
       border: 1px solid #B4BDC4;
       background: #fff;
-      background-image: url('../../img/Favourites.svg');
+      background-image: url('../../images/Favourites.svg');
       background-repeat: no-repeat;
       background-position: center;
       transition: box-shadow 300ms;
 
       &--added {
-        background-image: url('../../img/FavouritesFilled.svg');
+        background-image: url('../../images/FavouritesFilled.svg');
         border: 1px solid #E2E6E9;
         color: #27AE60;
       }
