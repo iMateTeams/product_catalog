@@ -142,7 +142,7 @@
     justify-content: space-between;
     padding-top: 16px;
     border-top: 1px solid $elements-color-light-gray;
-    @include onDesaktop {
+    @include onDesktop {
       padding-top: 24px;
     }
 
