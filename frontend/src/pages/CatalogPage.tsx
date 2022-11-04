@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PaginationButtons } from '../components/Pagination/PaginationButtons';
 import { PaginationPerPage } from '../components/Pagination/PaginationPerPage';
 import { ProductCard } from '../components/ProductCard';
-import { phones } from '../phones/phones_data';
+// import { phones } from '../phones/phones_data';
 import { Product } from '../types/Product';
 import phonePage from './styles/CatalogPage.module.scss';
 import home from '../images/home.svg';
@@ -19,17 +19,12 @@ export const CatalogPage: React.FC<Props> = ({ products , addOrRemoveCart }) => 
   const [currentPage, setCurrentPage] = useState(1);
   const [phonesPerPage, setPhonesPerPage] = useState(16);
   const [visiblePhones, setVisiblePhones] = useState(products.slice(0,phonesPerPage));
- 
-
-  // console.log(products);
-  // console.log(visiblePhones);
- 
 
   useEffect(() => {
     const lastPhoneIndex = currentPage * phonesPerPage; 
     const firstPhoneIndex = lastPhoneIndex - phonesPerPage;
 
-    setVisiblePhones(phones.slice(firstPhoneIndex,lastPhoneIndex));
+    setVisiblePhones(products.slice(firstPhoneIndex,lastPhoneIndex));
 
   }, [currentPage, phonesPerPage]);
 

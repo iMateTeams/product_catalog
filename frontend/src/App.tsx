@@ -1,5 +1,5 @@
 import './App.css';
-import { ProductCard } from './components/ProductCard';
+// import { ProductCard } from './components/ProductCard';
 import { Footer } from './components/Footer';
 
 import React, { useEffect, useState } from 'react';
@@ -20,36 +20,93 @@ import { Product } from './types/Product';
 
 import { getAll } from '../src/api/products';
 import { CartPage } from './pages/CartPage';
-import { phones } from './phones/phones_data';
 
 const App: React.FC = () => {
-
   const [products, setProducts] = useState<Product[]>([]);
-  const [productsInCart, setProductsInCart] = useState<Product[]>([]);
+  const [productsInCart, setProductsInCart] = useState<Product[]>(() => {
+    const localCart = localStorage.getItem('productsInCart') || '';
+    const initialCart = JSON.parse(localCart);
+    console.log(localCart);
+    return initialCart;
+  });
   const [burgerActive, setBurgerActive] = useState(false);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
     getAll()
       .then((data) => {
         setProducts(data);
       });
-    [...products].forEach(product => {
-      product.inCart = false;
-      product.isFavorite= false;
-    });
-    
+   
+    setProducts(prev => prev.map(product => Object.assign(product,{inCart : false, isFavorite: false, count: 0,})));
+
   }, []);
+  
+
+  useEffect(() => {
+    localStorage.setItem('productsInCart', JSON.stringify(productsInCart));
+  }, [productsInCart]);
+
+  useEffect(() => {
+    setProductsInCart([...products].filter(product => product.inCart === true));
+  }, [products]);
+
+  useEffect(() => {
+    setTotalPrice([...productsInCart].map(product => product.count * product.price)
+      .reduce((sum, number) => sum + number,0));
+  }, [productsInCart]);
+
+  useEffect(() => {
+    setTotalPrice([...productsInCart].map(product => product.count * product.price)
+      .reduce((sum, number) => sum + number,0));
+  }, [productsInCart]);
+
+
 
   const addOrRemoveCart = (id: number) => {
-    products[id].inCart = !products[id].inCart;
-    setProductsInCart([...products].filter(product => product.inCart = true));
-    console.log(products[id]);
+    setProducts(prev => prev.map(product => {
+      if (+product.id === id) {
+        product.inCart = !product.inCart;
+      }
+      if (product.inCart) {
+        product.count = 1;
+      } else {
+        product.count = 0;
+      }
+      return product;
+    }));
   };
 
+  const removeFromCart = (id: number) => {
+    setProducts(prev => prev.map(product => {
+      if (+product.id === id) {
+        product.inCart = false;
+        product.count = 0;
+      }
+      return product;
+    }));
+  };
+
+  const countPlus = (id: number) => {
+    setProducts(prev => prev.map(product => {
+      if (+product.id === id) {
+        product.count++;
+      }
+      return product;
+    }));
+  };
+
+  const countMinus = (id: number) => {
+    setProducts(prev => prev.map(product => {
+      if (+product.id === id) {
+        product.count--;
+      }
+      return product;
+    }));
+  };
 
   return (
     <>
-      {/* <MainNav /> */}
       <Header onClick={() => setBurgerActive(!burgerActive)} clicked={burgerActive}/>
       <BurgerMenu burgerActive={burgerActive}/>
       <div className="section">
@@ -78,7 +135,14 @@ const App: React.FC = () => {
               <Route index element={<AccessoriesPage />} />
             </Route>
             <Route path="cart">
-              <Route index element={<CartPage products={productsInCart} />} />
+              <Route index element={
+                <CartPage 
+                  products={productsInCart}
+                  removeFromCart={removeFromCart}
+                  countPlus={countPlus}
+                  countMinus={countMinus}
+                  totalPrice={totalPrice}
+                />} />
             </Route>
           </Routes>
         </div>
