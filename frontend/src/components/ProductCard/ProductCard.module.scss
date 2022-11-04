@@ -1,0 +1,137 @@
+@import '../../utils/vars.scss';
+
+.card {
+  width: 272px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $elements-color-light-gray;
+
+  &__content {
+    padding: 32px;
+  }
+
+  &__image {
+    height: 196px;
+    width: 100%;
+    object-fit: contain;
+    margin-bottom: 24px;
+  }
+
+  &__name {
+    color: $primary-color-black;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    min-height: 64px;
+  }
+
+  &__price {
+    display: flex;
+    margin: 8px 0 16px;
+    position: relative;
+
+    &_current {
+      margin-right: 8px;
+      color: $primary-color-black;
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 31px;
+    }
+
+    &_full {
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 31px;
+      text-decoration-line: line-through;
+      color: $secondary-color-gray;
+    }
+  }
+
+  &__price::after {
+    content: '';
+    position: absolute;
+    height: 0px;
+    width: 100%;
+    border: 1px solid $elements-color-light-gray;
+    bottom: -8px;
+    align-self: stretch;
+  }
+
+  &__specs {
+    padding: 8px 0px;
+
+    &_block {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    &_title {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 15px;
+      color: $secondary-color-gray;
+    }
+
+    &_value {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 15px;
+      color: $primary-color-black;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+
+    &_cart {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 160px;
+      height: 40px;
+      background: $primary-color-black;
+      color: $white-color;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 21px;
+      transition: box-shadow 300ms;
+      border: 0px;
+
+      &__added {
+        background: $white-color;
+        border: 1px solid $elements-color-light-gray;
+        color: $green-color;
+      }
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: 0px 3px 13px rgba(23, 32, 49, 0.4);
+      }
+    }
+
+    &_fav {
+      width: 40px;
+      border: 1px solid $icons-color-gray;
+      background: $white-color;
+      background-image: url('../../images/Favourites.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: box-shadow 300ms;
+
+      &__added {
+        background-image: url('../../images/FavouritesFilled.svg');
+        border: 1px solid $elements-color-light-gray;
+        color: $green-color;
+      }
+
+      &:hover {
+        cursor: pointer;
+        border: 1px solid $primary-color-black;
+        box-shadow: 0px 3px 13px rgba(23, 32, 49, 0.4);
+      }
+    }
+  }
+}
