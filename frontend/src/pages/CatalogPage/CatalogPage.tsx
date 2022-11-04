@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { PaginationButtons } from '../../components/Pagination/PaginationButtons';
 import { PaginationPerPage } from '../../components/Pagination/PaginationPerPage';
 import { ProductCard } from '../../components/ProductCard';
