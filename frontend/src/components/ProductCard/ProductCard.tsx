@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import classNames from 'classnames';
-import './ProductCard.scss';
+import productCard from '../ProductCard/ProductCard.module.scss';
 import { Product } from '../../types/Product';
+import classNames from 'classnames';
 
 type Props = {
   product: Product;
@@ -23,11 +23,7 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart, addOrRe
     liked,
   } = product;
 
-  const [addToFavorites, setAddToFavorites] = useState(false);
-
-  const handleAddToFavorites = () => {
-    setAddToFavorites(prevState => !prevState);
-  };
+ 
 
   const [img, setImg] = useState('');
 
@@ -43,80 +39,66 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart, addOrRe
 
 
   return (
-    <section className="card">
-      <div className="card__content">
-        <img src={img} alt="phoneImage" className="card__image" />
-        <div className="card__name">
+    <section className={productCard.card}>
+      <div className={productCard.card__content}>
+        <img src={img}  alt="phoneImage" className={productCard.card__image} />
+        <div className={productCard.card__name}>
           {name}
         </div>
-        <div className="card__price">
-          <div className="card__price-current">
-            {`${price}€`}
+        <div className={productCard.card__price}>
+          <div className={productCard.card__price_current}>
+            {`${price}$`}
           </div>
-          <div className="card__price-full">
-            {`${fullPrice}€`}
+          <div className={productCard.card__price_full}>
+            {`${fullPrice}$`}
           </div>
         </div>
-        <div className="card__specs">
-          <div className="card__specs-block">
-            <div className="card__specs-title">
+        <div className={productCard.card__specs}>
+          <div className={productCard.card__specs_block}>
+            <div className={productCard.card__specs_title}>
               Screen
             </div>
-            <div className="card__specs-value">
+            <div className={productCard.card__specs_value}>
               {screen}
             </div>
           </div>
-          <div className="card__specs-block">
-            <div className="card__specs-title">
+          <div className={productCard.card__specs_block}>
+            <div className={productCard.card__specs_title}>
               Capacity
             </div>
-            <div className="card__specs-value">
+            <div className={productCard.card__specs_value}>
               {capacity}
             </div>
           </div>
-          <div className="card__specs-block">
-            <div className="card__specs-title">
+          <div className={productCard.card__specs_block}>
+            <div className={productCard.card__specs_title}>
               RAM
             </div>
-            <div className="card__specs-value">
+            <div className={productCard.card__specs_value}>
               {ram}
             </div>
           </div>
         </div>
-        <div className="card__buttons">
-          {inCart ? (
-            <button
-              type="button"
-              className="card__buttons-cart card__buttons-cart--added"
-              onClick={() => addOrRemoveCart(+product.id)}
-            >
-              Added
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="card__buttons-cart"
-              onClick={() => addOrRemoveCart(+product.id)}
-            >
-              Add to cart
-            </button>
-          )}
-
-          {liked ? (
-            <button
-              type="button"
-              className={'card__buttons-fav card__buttons-fav--added'}
-              onClick={() => addOrRemoveLiked(+product.id)}
-            >
-            </button>
-          ) : (
-            <button
-              type="button"
-              className={'card__buttons-fav'}
-              onClick={() => addOrRemoveLiked(+product.id)}
-            >
-            </button>
-          )}
+        <div className={productCard.card__buttons}>
+          <button
+            type="button"
+            className={`
+              ${productCard.card__buttons_cart} 
+              ${inCart && productCard.card__buttons_cart__added}
+            `}
+            onClick={() => addOrRemoveCart(+id)}
+          >
+            {inCart ? 'Added' :'Add to cart'}
+          </button>
+          <button
+            type="button"
+            className={classNames(
+              productCard.card__buttons_fav,
+              { [productCard.card__buttons_fav__added]: liked }
+            )}
+            onClick={() => addOrRemoveLiked(+id)}
+          >
+          </button>
         </div>
       </div>
     </section>

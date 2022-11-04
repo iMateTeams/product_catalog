@@ -1,7 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import '../../components/Pagination/Pagination.scss';
-import { Product } from '../../types/Product';
 
 
 
