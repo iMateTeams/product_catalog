@@ -56,13 +56,6 @@ const App: React.FC = () => {
       .reduce((sum, number) => sum + number,0));
   }, [productsInCart]);
 
-  useEffect(() => {
-    setTotalPrice([...productsInCart].map(product => product.count * product.price)
-      .reduce((sum, number) => sum + number,0));
-  }, [productsInCart]);
-
-
-
   const addOrRemoveCart = (id: number) => {
     setProducts(prev => prev.map(product => {
       if (+product.id === id) {
