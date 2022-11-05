@@ -17,7 +17,7 @@ import { PhoneCardPage } from './pages/PhoneCardPage';
 import { TabletsPage } from './pages/TabletsPage';
 import { Product } from './types/Product';
 
-import { getAll, getPart, update } from '../src/api/products';
+import { getPart, update } from '../src/api/products';
 import { CartPage } from './pages/CartPage';
 
 const App: React.FC = () => {
@@ -27,18 +27,11 @@ const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [phonesPerPage, setPhonesPerPage] = useState(16);
   const [dataAmount, setDataAmount] = useState(0);
-  const [productsInCart, setProductsInCart] = useState<Product[]>(
-  //   () => {
-  //   const localCart = localStorage.getItem('productsInCart') || '';
-  //   const initialCart = JSON.parse(localCart);
-  //   console.log(localCart);
-  //   return initialCart;
-  // }
-    []);
+  const [productsInCart, setProductsInCart] = useState<Product[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    localStorage.setItem('productsInCart', JSON.stringify(productsInCart));
+    window.localStorage.setItem('productsInCart', JSON.stringify(productsInCart));
   }, [productsInCart]);
   
 
@@ -47,64 +40,50 @@ const App: React.FC = () => {
       .then((products) => {
         setProducts(products.items);
         setDataAmount(products.dataLength);
-      });
-
-    getAll()
-      .then((data) => {
-        console.log(data);
-
-        setProductsInCart(data.filter((product: Product) => product.inCart === true));
+        setProductsInCart(products.itemsInCart || []);
+        console.log(products.itemsInCart);
       });
   }, []);
-
-  console.log(productsInCart);
 
   useEffect(() => {
     getPart(phonesPerPage, currentPage)
       .then((products) => {
-        setProducts(products.items);
+        setProducts(products.items.map((pr:Product) => {
+          const product = productsInCart.find(prInCart => prInCart.id === pr.id);
+          if (product) {
+            pr = {...product};
+          }
+          return pr;
+        }));
         setDataAmount(products.dataLength);
       });
 
     // setProducts(prev => prev.map(pr => {
     //   pr.inCart = false;
     //   update(+pr.id, { inCart:false});
+
     //   return pr;
     // }));
-  }, [phonesPerPage, currentPage]);
-
-  useEffect(() => {
-    setTotalPrice([...productsInCart].map(product => (product.count || 0) * product.price)
-      .reduce((sum, number) => sum + number,0));
-  }, [productsInCart]);
-
-  useEffect(() => {
-    setTotalPrice([...productsInCart].map(product => (product.count || 0) * product.price)
-      .reduce((sum, number) => sum + number,0));
     
-  }, [productsInCart]);
+    setTotalPrice(productsInCart
+      .map(product => (product.count || 0) * product.price)
+      .reduce((sum, number) => sum + number,0) 
+      || 0);
+
+  }, [phonesPerPage, currentPage, productsInCart]);
 
   const addOrRemoveCart = (id: number) => {
     const newProducts = products.map((product) => {
-      if (+product.id === id) {
-        product.inCart =!product.inCart;
-        
-      
-        if (product.inCart) {
-          product.count = 1;
-          setProductsInCart(prevProdacts => [...prevProdacts,product]);
-        } else {
-          product.count = 0;
-          setProductsInCart(prevProdacts => prevProdacts.filter(product => +product.id !== id));
-        }
+      if (+product.id === id && !product.inCart) {
+        product.inCart = true;
+        product.count = 1;
+        setProductsInCart(prevProdacts => [...prevProdacts,product]);
+        console.log(product);
+        update(id, {inCart: product.inCart });
+        update(id, { count : product.count });
       }
       return product;
     });
-    console.log(newProducts.find(product => +product.id === id));
-    console.log(productsInCart);
-
-    update(id, { inCart: newProducts.find(product => +product.id === id)?.inCart });
-    update(id, { count: newProducts.find(product => +product.id === id)?.count });
 
     setProducts(newProducts);
   };
@@ -132,12 +111,11 @@ const App: React.FC = () => {
         product.inCart = false;
         product.count = 0;
         setProductsInCart(prevProdacts => prevProdacts.filter(product => +product.id !== id));
+        update(id, {inCart: product.inCart });
+        update(id, { count : product.count });
       }
       return product;
     });
-    
-    update(id, { inCart: newProducts.find(product => +product.id === id)?.inCart });
-    update(id, { count: newProducts.find(product => +product.id === id)?.count });
 
     setProducts(newProducts);
   };
@@ -146,11 +124,10 @@ const App: React.FC = () => {
     setProductsInCart(prevProducts => prevProducts.map(product => {
       if (+product.id === id) {
         product.count = (product.count) ? (product.count + 1) : 1;
+        update(id, { count : product.count });
       }
       return product;
     }));
-    update(id, { inCart: productsInCart.find(product => +product.id === id)?.inCart });
-    update(id, { count: productsInCart.find(product => +product.id === id)?.count });
 
   };
 
@@ -158,11 +135,19 @@ const App: React.FC = () => {
     setProductsInCart(prevProducts => prevProducts.map(product => {
       if (+product.id === id) {
         product.count = (product.count) ? (product.count - 1) : 1;
+        update(id, { count : product.count });
       }
       return product;
     }));
     
-    update(id, { count: productsInCart.find(product => +product.id === id)?.count });
+  };
+
+  const clearCart = (cart:Product[]) => {
+    cart.forEach(product => {
+      update(+product.id, { count: 0});
+      update(+product.id, { inCart: false });
+    });
+    setProductsInCart([]);
   };
 
 
@@ -210,6 +195,9 @@ const App: React.FC = () => {
                   countPlus={countPlus}
                   countMinus={countMinus}
                   totalPrice={totalPrice}
+                  // saveCart={saveCart}
+                  clearCart={clearCart}
+
                 />} />
             </Route>
             {/* <Route path="favorites">

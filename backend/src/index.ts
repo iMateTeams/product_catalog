@@ -1,6 +1,6 @@
 const express = require('express');
 const fs = require('fs');
-//const path = require('path');
+const path = require('path');
 const cors = require('cors');
 
 const PORT = process.env.PORT || 4002;
@@ -18,17 +18,22 @@ app.use('/', (req, res, next) => {
 
   app.use(express.static('./public/'));
 
-  app.patch('/phones/:id', (req, res) => {
+  app.patch('/products/:id', (req, res) => {
     const id = req.params.id;
     const data = req.body;
     const phones = JSON.parse(fs.readFileSync('./data/phones.json', 'utf-8'));
     const phone = phones.find((phone) => phone.id === id);
 
-    console.log(data);
-
     if (phone && Object.prototype.hasOwnProperty.call(data, 'inCart')) {
       console.log(data);
       phone.inCart = data.inCart;
+      fs.writeFileSync('./data/phones.json', JSON.stringify(phones));
+      res.status(200).json(phone);
+    }
+
+    if (phone && Object.prototype.hasOwnProperty.call(data, 'count')) {
+      console.log(data);
+      phone.count = data.count;
       fs.writeFileSync('./data/phones.json', JSON.stringify(phones));
       res.status(200).json(phone);
     }
@@ -46,13 +51,14 @@ app.use('/', (req, res, next) => {
   app.get('/products', (req, res) => {
     const numberOfItems = req.query._limit;
     const currentPage = req.query._page;
-    const phones = fs.readFileSync('./data/phones.json', 'utf-8');
+    const phones = JSON.parse(fs.readFileSync('./data/phones.json', 'utf-8'));
   
     res.statusCode = 200;
 
     res.send({
-      items: JSON.parse(phones).splice((currentPage - 1) * numberOfItems, numberOfItems),
-      dataLength: JSON.parse(phones).length
+      items: phones.splice((currentPage - 1) * numberOfItems, numberOfItems),
+      dataLength: phones.length,
+      itemsInCart:phones.filter(phone => phone.inCart === true),
     });
     
   });

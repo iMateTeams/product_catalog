@@ -13,10 +13,7 @@ export const getPart = async (numberOfItems: number, currentPage: number) => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const update = async (id: number, data: any) => {
-  await axios.patch(`${phonesUrl}/${id}`, data);
+  await axios.patch(`${baseUrl}/${id}`, data);
+  console.log(data);
 };
 
-export const getAll = async () => {
-  const response = await axios.get(baseUrl);
-  return response.data;
-};
