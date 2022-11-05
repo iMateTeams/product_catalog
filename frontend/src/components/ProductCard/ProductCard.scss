@@ -1,0 +1,154 @@
+@font-face {
+  font-family: "Mont";
+  src: url(../../fonts/Mont-Regular.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Mont";
+  src: url(../../fonts/Mont-Bold.ttf);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Mont";
+  src: url(../../fonts/Mont-SemiBold.ttf);
+  font-weight: 600;
+}
+
+.card {
+  width: 272px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #E2E6E9;
+  font-family: 'Mont';
+
+  &__content {
+    padding: 32px;
+  }
+
+  &__image {
+    height: 196px;
+    width: 100%;
+    object-fit: contain;
+    margin-bottom: 24px;
+  }
+
+  &__name {
+    color: #313237;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    min-height: 64px;
+  }
+
+  &__price {
+    display: flex;
+    margin: 8px 0 16px;
+    position: relative;
+
+    &-current {
+      margin-right: 8px;
+      color: #313237;
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 31px;
+    }
+
+    &-full {
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 31px;
+      text-decoration-line: line-through;
+      color: #89939A;
+    }
+  }
+
+  &__price::after {
+    content: '';
+    position: absolute;
+    height: 0px;
+    width: 100%;
+    border: 1px solid #E2E6E9;
+    bottom: -8px;
+    align-self: stretch;
+  }
+
+  &__specs {
+    padding: 8px 0px;
+
+    &-block {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    &-title {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 15px;
+      color: #89939A;
+    }
+
+    &-value {
+      font-weight: 600;
+      font-size: 12px;
+      line-height: 15px;
+      color: #313237;
+    }
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: space-between;
+
+    &-cart {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0px;
+      width: 160px;
+      height: 40px;
+      background: #313237;
+      color: #fff;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 21px;
+      transition: box-shadow 300ms;
+
+      &--added {
+        background: #fff;
+        border: 1px solid #E2E6E9;
+        color: #27AE60;
+      }
+
+      &:hover {
+        cursor: pointer;
+        box-shadow: 0px 3px 13px rgba(23, 32, 49, 0.4);
+      }
+    }
+
+    &-fav {
+      width: 40px;
+      border: 1px solid #B4BDC4;
+      background: #fff;
+      background-image: url('../../images/Favourites.svg');
+      background-repeat: no-repeat;
+      background-position: center;
+      transition: box-shadow 300ms;
+
+      &--added {
+        background-image: url('../../images/FavouritesFilled.svg');
+        border: 1px solid #E2E6E9;
+        color: #27AE60;
+      }
+
+      &:hover {
+        cursor: pointer;
+        border: 1px solid #313237;
+        box-shadow: 0px 3px 13px rgba(23, 32, 49, 0.4);
+      }
+    }
+  }
+}
