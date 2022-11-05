@@ -15,3 +15,8 @@ export const getPart = async (numberOfItems: number, currentPage: number) => {
 export const update = async (id: number, data: any) => {
   await axios.patch(`${phonesUrl}/${id}`, data);
 };
+
+export const getAll = async () => {
+  const response = await axios.get(baseUrl);
+  return response.data;
+};

@@ -2,3 +2,5 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 cd ./backend && npm run lint:fix && git add .cd ./backend && npm run lint:fix && git add .
+cd ./backend && npm run lint:fix && git add .
+cd ./backend && npm run lint:fix && git add .

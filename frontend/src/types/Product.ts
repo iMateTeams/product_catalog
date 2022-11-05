@@ -15,4 +15,5 @@ export interface Product {
   inCart?: boolean;
   isFavorite?: boolean;
   liked?: boolean;
+  count?: number;
 }
