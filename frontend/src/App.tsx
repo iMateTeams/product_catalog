@@ -27,12 +27,14 @@ const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [phonesPerPage, setPhonesPerPage] = useState(16);
   const [dataAmount, setDataAmount] = useState(0);
-  const [productsInCart, setProductsInCart] = useState<Product[]>(() => {
-    const localCart = localStorage.getItem('productsInCart') || '';
-    const initialCart = JSON.parse(localCart);
-    console.log(localCart);
-    return initialCart;
-  });
+  const [productsInCart, setProductsInCart] = useState<Product[]>(
+  //   () => {
+  //   const localCart = localStorage.getItem('productsInCart') || '';
+  //   const initialCart = JSON.parse(localCart);
+  //   console.log(localCart);
+  //   return initialCart;
+  // }
+    []);
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
