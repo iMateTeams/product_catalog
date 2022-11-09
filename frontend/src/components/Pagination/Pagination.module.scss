@@ -1,14 +1,21 @@
 @import '../../utils/vars.scss';
+@import '../../utils/mixins.scss';
+@import '../../utils/vars.scss';
 
 .pagination {
   display: flex;
   list-style: none;
   align-items: center;
   justify-content: center;
+  &__section {
+    margin-right: 16px;
+    
+  }
 
-  &_box {
+  &__box {
     background-color: $white-color;
     border: 1px solid $icons-color-gray;
+    
 
     &:hover {
       outline: none;
@@ -21,7 +28,7 @@
     }
   }
 
-  &_title {
+  &__title {
     font-weight: 700;
     font-size: 12px;
     line-height: 15px;
@@ -29,21 +36,30 @@
     margin-bottom: 4px;
   }
 
-  &_page {
+  &__page {
     box-sizing: border-box;
     width: 128px;
     height: 40px;
     font-weight: 600;
     font-size: 14px;
     line-height: 21px;
-    color: $secondary-color-gray;
+    color: $primary-color-black;
     margin-right: 12px;
     padding: 12px;
     outline: none;
     border: 0px;
+    &_sort {
+      color: $primary-color-black;
+      font-size: 14px;
+      line-height: 120%;
+    }
+    width: 117px;
+    @include onTablet {
+      width: 217px;
+    }
   }
 
-  &_link {
+  &__link {
     display: block;
     text-decoration: none;
     font-family: 'Mont';
@@ -58,11 +74,11 @@
     }
   }
 
-  &_list {
+  &__list {
     text-decoration: none;
   }
 
-  &_button {
+  &__button {
     padding: 0;
     background-color: $white-color;
     border: 1px solid $elements-color-light-gray;
@@ -71,7 +87,7 @@
     margin: 0 2px;
     transition: background-color 0.5s;
 
-    &__left_right {
+    &_left_right {
       margin: 0 14px;
       border: 1px solid $icons-color-gray;
     }
@@ -79,12 +95,22 @@
       background-color: $primary-color-black;
     }
   }
-  &_active {
+  &__active {
     background-color: $primary-color-black;
     color: $white-color;
   }
-  &_disabled :hover{
+  &__disabled :hover{
     background-color: $white-color;
     color: $primary-color-black;
   }
+
+  
+  // &__option {
+  //   width: 136px;
+  //   font-weight: 700;
+  //   font-size: 14px;
+  //   @include onTablet {
+  //     width: 187px;
+  //   }
+  
 }

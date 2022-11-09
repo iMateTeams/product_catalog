@@ -19,6 +19,7 @@ import { Product } from './types/Product';
 
 import { getPart, update } from '../src/api/products';
 import { CartPage } from './pages/CartPage';
+import { SortBy } from './types/SortBy';
 
 const App: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -28,7 +29,10 @@ const App: React.FC = () => {
   const [phonesPerPage, setPhonesPerPage] = useState(16);
   const [dataAmount, setDataAmount] = useState(0);
   const [productsInCart, setProductsInCart] = useState<Product[]>([]);
+  const [productsFavor, setProductsFavor] = useState<Product[]>([]);
+  const [sortBy, setSortBy] = useState<SortBy | string>(SortBy.age);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [isLoad, setLoad] = useState(false);
 
   useEffect(() => {
     window.localStorage.setItem('productsInCart', JSON.stringify(productsInCart));
@@ -36,17 +40,21 @@ const App: React.FC = () => {
   
 
   useEffect(() => {
-    getPart(phonesPerPage, currentPage)
+    getPart(phonesPerPage, currentPage, sortBy)
       .then((products) => {
         setProducts(products.items);
         setDataAmount(products.dataLength);
         setProductsInCart(products.itemsInCart || []);
-        console.log(products.itemsInCart);
+        setProductsFavor(products.itemsFavor || []);
       });
+    
   }, []);
 
   useEffect(() => {
-    getPart(phonesPerPage, currentPage)
+    setTimeout(() => {
+      setLoad(true);
+    }, 1000);
+    getPart(phonesPerPage, currentPage, sortBy)
       .then((products) => {
         setProducts(products.items.map((pr:Product) => {
           const product = productsInCart.find(prInCart => prInCart.id === pr.id);
@@ -56,11 +64,12 @@ const App: React.FC = () => {
           return pr;
         }));
         setDataAmount(products.dataLength);
+        
       });
 
     // setProducts(prev => prev.map(pr => {
     //   pr.inCart = false;
-    //   update(+pr.id, { inCart:false});
+    //   update(+pr.id, { liked:false});
 
     //   return pr;
     // }));
@@ -70,7 +79,7 @@ const App: React.FC = () => {
       .reduce((sum, number) => sum + number,0) 
       || 0);
 
-  }, [phonesPerPage, currentPage, productsInCart]);
+  }, [phonesPerPage, currentPage, productsInCart, sortBy]);
 
   const addOrRemoveCart = (id: number) => {
     const newProducts = products.map((product) => {
@@ -89,24 +98,20 @@ const App: React.FC = () => {
   };
 
   const addOrRemoveLiked = (id: number) => {
-    const newProducts = products.map((product) => {
+    products.map((product) => {
       if (+product.id === id) {
-        return {
-          ...product,
-          liked: !product.liked || false,
-        };
+        product.liked = !product.liked;
+        setProductsFavor(prevProdacts => [...prevProdacts,product]);
+        // console.log(product);
+        update(id, {liked: product.liked });
       }
 
       return product;
     });
-
-    update(id, { liked: newProducts.find(product => +product.id === id)?.liked });
-
-    setProducts(newProducts);
   };
 
   const removeFromCart = (id: number) => {
-    const newProducts = products.map((product) => {
+    products.map((product) => {
       if (+product.id === id) {
         product.inCart = false;
         product.count = 0;
@@ -116,8 +121,6 @@ const App: React.FC = () => {
       }
       return product;
     });
-
-    setProducts(newProducts);
   };
 
   const countPlus = (id: number) => {
@@ -176,6 +179,9 @@ const App: React.FC = () => {
                   addOrRemoveCart={addOrRemoveCart}
                   dataAmount={dataAmount}
                   addOrRemoveLiked={addOrRemoveLiked}
+                  sortBy={sortBy}
+                  setSortBy={setSortBy}
+                  isLoad={isLoad}
                 />
               }
               />

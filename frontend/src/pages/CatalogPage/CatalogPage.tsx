@@ -7,6 +7,8 @@ import phonePage from './CatalogPage.module.scss';
 import home from '../../images/home.svg';
 
 import arrow_right from '../../images/ArrowRight.svg';
+import { SortBy } from '../../types/SortBy';
+import { Loader } from '../../components/Loader';
 
 type Props = {
   products: Product[];
@@ -17,6 +19,9 @@ type Props = {
   addOrRemoveCart: (id: number) => void;
   dataAmount: number;
   addOrRemoveLiked: (id: number) => void;
+  sortBy:SortBy | string;
+  setSortBy: (sort: SortBy | string) => void;
+  isLoad: boolean;
 };
 
 export const CatalogPage: React.FC<Props>
@@ -29,6 +34,9 @@ export const CatalogPage: React.FC<Props>
     addOrRemoveCart,
     dataAmount,
     addOrRemoveLiked,
+    sortBy,
+    setSortBy,
+    isLoad,
   }) => {
 
     return (
@@ -46,37 +54,48 @@ export const CatalogPage: React.FC<Props>
           <h1 className={phonePage.phones__title}>
             Mobile Phones
           </h1>
-          <p className={phonePage.phones__count}>
-            {dataAmount} models
-          </p>
-          <div className={phonePage.phones__sort}>
-            <PaginationPerPage
-              dataAmount={dataAmount}
-              phonesPerPage={phonesPerPage}
-              setPhonesPerPage={setPhonesPerPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </div>
+          {!isLoad 
+            ? <Loader />
+            : (<>
 
-          <div className={phonePage.phones__cards}>
-            {products.map(product => {
-              return (
-                <ProductCard
-                  product={product}
-                  addOrRemoveCart={addOrRemoveCart}
-                  addOrRemoveLiked={addOrRemoveLiked}
-                  key={product.id}
+              <p className={phonePage.phones__count}>
+                {dataAmount} models
+              </p>
+      
+              <div className={phonePage.phones__sort}>
+                <PaginationPerPage
+                  dataAmount={dataAmount}
+                  phonesPerPage={phonesPerPage}
+                  setPhonesPerPage={setPhonesPerPage}
+                  setCurrentPage={setCurrentPage}
+                  sortBy={sortBy}
+                  setSortBy={setSortBy}
                 />
-              );
-            }
-            )}
-          </div>
-          <PaginationButtons
-            phonesPerPage={phonesPerPage}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            dataAmount={dataAmount}
-          />
+              </div>
+          
+              <div className={phonePage.phones__cards}>
+                {products.map(product => {
+                  return (
+                    <ProductCard
+                      product={product}
+                      addOrRemoveCart={addOrRemoveCart}
+                      addOrRemoveLiked={addOrRemoveLiked}
+                      key={product.id}
+                    />
+                  );
+                }
+                )}
+              </div>
+              <PaginationButtons
+                phonesPerPage={phonesPerPage}
+                currentPage={currentPage}
+                setCurrentPage={setCurrentPage}
+                dataAmount={dataAmount}
+              />
+            
+            </>
+            )
+          }
         </div>
       </section>
     );
