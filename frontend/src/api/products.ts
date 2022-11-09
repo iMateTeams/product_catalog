@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { SortBy } from '../types/SortBy';
 
-// const baseUrl = 'https://i-mate-teams-product-catalog.herokuapp.com/products';
+const baseUrl = 'https://i-mate-teams-product-catalog.herokuapp.com/products';
 // const phonesUrl = 'https://i-mate-teams-product-catalog.herokuapp.com/phones';
 
-const baseUrl = 'http://localhost:4002/products';
+// const baseUrl = 'http://localhost:4002/products';
 // const phonesUrl = 'http://localhost:4002/phones';
 
 export const getPart = async (numberOfItems: number, currentPage: number, sortBy: SortBy | string) => {
