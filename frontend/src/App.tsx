@@ -20,6 +20,7 @@ import { Product } from './types/Product';
 import { getPart, update } from '../src/api/products';
 import { CartPage } from './pages/CartPage';
 import { SortBy } from './types/SortBy';
+import { FavoritesPage } from './pages/FavoritesPage';
 
 const App: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -37,6 +38,9 @@ const App: React.FC = () => {
   useEffect(() => {
     window.localStorage.setItem('productsInCart', JSON.stringify(productsInCart));
   }, [productsInCart]);
+  useEffect(() => {
+    window.localStorage.setItem('productsFavor', JSON.stringify(productsFavor));
+  }, [productsFavor]);
   
 
   useEffect(() => {
@@ -56,30 +60,21 @@ const App: React.FC = () => {
     }, 1000);
     getPart(phonesPerPage, currentPage, sortBy)
       .then((products) => {
-        setProducts(products.items.map((pr:Product) => {
-          const product = productsInCart.find(prInCart => prInCart.id === pr.id);
-          if (product) {
-            pr = {...product};
-          }
-          return pr;
-        }));
+        setProducts(products.items);
         setDataAmount(products.dataLength);
-        
+        setProductsInCart(products.itemsInCart || []);
+        setProductsFavor(products.itemsFavor || []);
       });
 
-    // setProducts(prev => prev.map(pr => {
-    //   pr.inCart = false;
-    //   update(+pr.id, { liked:false});
+  },[phonesPerPage, currentPage, sortBy]);
 
-    //   return pr;
-    // }));
-    
+  useEffect(() => {
     setTotalPrice(productsInCart
       .map(product => (product.count || 0) * product.price)
       .reduce((sum, number) => sum + number,0) 
       || 0);
+  },[productsInCart]);
 
-  }, [phonesPerPage, currentPage, productsInCart, sortBy]);
 
   const addOrRemoveCart = (id: number) => {
     const newProducts = products.map((product) => {
@@ -98,16 +93,25 @@ const App: React.FC = () => {
   };
 
   const addOrRemoveLiked = (id: number) => {
-    products.map((product) => {
+    const newProducts = products.map((product) => {
       if (+product.id === id) {
         product.liked = !product.liked;
-        setProductsFavor(prevProdacts => [...prevProdacts,product]);
-        // console.log(product);
-        update(id, {liked: product.liked });
+        console.log(product);
+        if (product.liked) {
+          setProductsFavor(prevProdacts => [...prevProdacts,product]);
+        } else {
+          setProductsFavor(prevProdacts => prevProdacts.filter(pr => +pr.id !== id));
+        }
+   
+        update(id, {liked: product.liked});
       }
-
+      
+     
       return product;
     });
+
+    
+    setProducts(newProducts);
   };
 
   const removeFromCart = (id: number) => {
@@ -156,7 +160,12 @@ const App: React.FC = () => {
 
   return (
     <>
-      <Header onClick={() => setBurgerActive(!burgerActive)} clicked={burgerActive}/>
+      <Header 
+        onClick={() => setBurgerActive(!burgerActive)} 
+        clicked={burgerActive}
+        amontInCart={productsInCart.length}
+        amountLiked={productsFavor.length}
+      />
       <BurgerMenu onClick={() => setBurgerActive(!burgerActive)} clicked={burgerActive}/>
       <div className="section">
         <div className="container">
@@ -201,14 +210,18 @@ const App: React.FC = () => {
                   countPlus={countPlus}
                   countMinus={countMinus}
                   totalPrice={totalPrice}
-                  // saveCart={saveCart}
                   clearCart={clearCart}
-
                 />} />
             </Route>
-            {/* <Route path="favorites">
-              <Route index element={<Favorites />} />
-            </Route> */}
+            <Route path="liked">
+              <Route index element={
+                <FavoritesPage
+                  products={productsFavor}
+                  addOrRemoveCart={addOrRemoveCart}
+                  addOrRemoveLiked={addOrRemoveLiked}
+                  isLoad={isLoad} 
+                />} />
+            </Route>
           </Routes>
         </div>
       </div>

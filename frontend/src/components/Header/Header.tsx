@@ -7,9 +7,11 @@ import { PageNavLink } from '../PageNavLink/PageNavLink';
 type Props = {
   onClick: React.MouseEventHandler<HTMLDivElement>;
   clicked: boolean;
+  amontInCart: number;
+  amountLiked: number;
 };
 
-export const Header: React.FC<Props> = ({ onClick, clicked }) => {
+export const Header: React.FC<Props> = ({ onClick, clicked, amontInCart, amountLiked}) => {
   return (
     <header className={styles.header}>
       <div className={styles.header__logo_n_nav}>
@@ -42,10 +44,16 @@ export const Header: React.FC<Props> = ({ onClick, clicked }) => {
       <div className={styles.header__link_n_beg}>
         <div className={styles.header__liked_box}>
           <NavLink to="liked" className={styles.header__liked} />
+          {amountLiked > 0 && 
+            <div className={styles.header__amount}>{amountLiked}</div>
+          }
         </div>
 
         <div className={styles.header__beg_box}>
           <NavLink to="cart" className={styles.header__beg} />
+          {amontInCart >0 && 
+            <div className={styles.header__amount}>{amontInCart}</div>
+          }
         </div>
       </div>
 
