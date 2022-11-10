@@ -1,4 +1,5 @@
 @import "../../utils/mixins.scss";
+@import '../../utils/vars.scss';
 @import "../BurgerMenu/BurgerMenu.module.scss";
 
 .header {
@@ -62,6 +63,7 @@
       width: 48px;
       height: 48px;
       box-shadow: -1px 0px 0px #E2E6E9;
+      position: relative;
 
       @include onDesktop {
         width: 64px;
@@ -70,26 +72,42 @@
   }
 
   &__liked {
+    
     width: 14px;
     height: 14px;
     background-image: url(../../images/liked.svg);
     background-repeat: no-repeat;
     background-size: cover;
     transition: 0.3s;
+    
 
     &:hover {
       transform: scale(1.1);
     }
   }
 
+  &__amount {
+    position: absolute;
+    width: 11px;
+    border-radius: 50%;
+    top: 20%;
+    right: 20%;
+    font-weight: 700;
+    font-size: 9px;
+    color: $white-color;
+    background-color: red;
+  }
+
   
   &__beg_box {
+    
     display: flex;
     justify-content: center;
     align-items: center;
     width: 48px;
     height: 48px;
     box-shadow: -1px 0px 0px #E2E6E9;
+    position: relative;
 
     @include onDesktop {
       width: 64px;
