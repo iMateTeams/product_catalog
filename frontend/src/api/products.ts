@@ -2,9 +2,9 @@ import axios from 'axios';
 import { SortBy } from '../types/SortBy';
 
 
-// const baseUrl = 'https://i-mate-teams-product-catalog.herokuapp.com/products';
+const baseUrl = 'https://i-mate-teams-product-catalog.herokuapp.com/products';
 
-const baseUrl = 'http://localhost:4002/products';
+// const baseUrl = 'http://localhost:4002/products';
 const phonesUrl = `${baseUrl}/phones`;
 const newestUrl = `${baseUrl}/newest`;
 const bestPriceUrl = `${baseUrl}/bestprice`;
