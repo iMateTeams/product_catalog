@@ -1,11 +1,17 @@
 {
   "files": {
-    "main.css": "/product_catalog/static/css/main.23d9c432.css",
-    "main.js": "/product_catalog/static/js/main.444df74e.js",
+    "main.css": "/product_catalog/static/css/main.42c4ad3a.css",
+    "main.js": "/product_catalog/static/js/main.84c4e46a.js",
     "static/media/headerLogo.svg": "/product_catalog/static/media/headerLogo.5700773f3ec1703a368379af224446e7.svg",
+    "static/media/iPad_carousel.jpg": "/product_catalog/static/media/iPad_carousel.317a869793da1f1457db.jpg",
     "static/media/Mont-Regular.ttf": "/product_catalog/static/media/Mont-Regular.e797167c18f9897bb607.ttf",
     "static/media/Mont-SemiBold.ttf": "/product_catalog/static/media/Mont-SemiBold.0b5e68ebb36ca4006e21.ttf",
     "static/media/Mont-Bold.ttf": "/product_catalog/static/media/Mont-Bold.3675b597d3ffb2b75168.ttf",
+    "static/media/accessories_category.png": "/product_catalog/static/media/accessories_category.72de678d7aa4b49e9885.png",
+    "static/media/tablet_category.png": "/product_catalog/static/media/tablet_category.2f41a1b7637db4a0781c.png",
+    "static/media/category_phones.png": "/product_catalog/static/media/category_phones.c72fbc0215ba1d519deb.png",
+    "static/media/picthree.bdd2e0fc.png": "/product_catalog/static/media/picthree.bdd2e0fc.bdd2e0fca0159e52f41c.png",
+    "static/media/iphone_14_pro_hero.jpg": "/product_catalog/static/media/iphone_14_pro_hero.03ebfc13045955c628be.jpg",
     "static/media/beg.svg": "/product_catalog/static/media/beg.1962e42406793fa66f0d.svg",
     "static/media/Favourites.svg": "/product_catalog/static/media/Favourites.6c1d1b28651481bdac89.svg",
     "static/media/liked.svg": "/product_catalog/static/media/liked.8b204efcfb5a53cadd96.svg",
@@ -16,12 +22,13 @@
     "static/media/menuIcon.svg": "/product_catalog/static/media/menuIcon.744ac0b04d84e4feeeb5.svg",
     "static/media/back_to_top.svg": "/product_catalog/static/media/back_to_top.ab5078e109e78e51e167.svg",
     "static/media/ArrowLeft.svg": "/product_catalog/static/media/ArrowLeft.7d3c7204a569b14ca2c58f128de43b0a.svg",
+    "static/media/VectorArrowRight.svg": "/product_catalog/static/media/VectorArrowRight.d8be0d9488d520e08fa6.svg",
     "static/media/ArrowRight.svg": "/product_catalog/static/media/ArrowRight.e028d3889646e0b5e56cf54f47bb701a.svg",
-    "main.23d9c432.css.map": "/product_catalog/static/css/main.23d9c432.css.map",
-    "main.444df74e.js.map": "/product_catalog/static/js/main.444df74e.js.map"
+    "main.42c4ad3a.css.map": "/product_catalog/static/css/main.42c4ad3a.css.map",
+    "main.84c4e46a.js.map": "/product_catalog/static/js/main.84c4e46a.js.map"
   },
   "entrypoints": [
-    "static/css/main.23d9c432.css",
-    "static/js/main.444df74e.js"
+    "static/css/main.42c4ad3a.css",
+    "static/js/main.84c4e46a.js"
   ]
 }
