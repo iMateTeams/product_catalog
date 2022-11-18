@@ -55,24 +55,24 @@ export const PaginationButtons: React.FC<Props> = ({
       <ul className={styles.pagination}>
         <li
           className={classNames(
-            styles.pagination_list,
+            styles.pagination__list,
             {
-              [styles.pagination_disabled]: currentPage === 1,
+              [styles.pagination__disabled]: currentPage === 1,
             },
           )}
         >
           <button 
             className={classNames(
-              styles.pagination_button, 
-              styles.pagination_button__left_right
+              styles.pagination__button, 
+              styles.pagination__button_left_right
             )}
             disabled={currentPage === 1}
           >
             <a
               data-cy="prevLink"
               className={classNames(
-                styles.pagination_link,
-                styles.pagination_link__left_right,
+                styles.pagination__link,
+                styles.pagination__link_left_right,
                 {
                   [styles.pagination_disabled]: currentPage === 1,
                 },
@@ -90,18 +90,18 @@ export const PaginationButtons: React.FC<Props> = ({
           getButtons(1, totalPages)
             .map(page => (
               <li
-                className={styles.pagination_list}
+                className={styles.pagination__list}
                 key={page}
               >
                 <button 
-                  className={styles.pagination_button}
+                  className={styles.pagination__button}
                 >
                   <a
                     data-cy="pageLink"
                     className={classNames(
-                      styles.pagination_link,
+                      styles.pagination__link,
                       {
-                        [styles.pagination_active]: page === currentPage,
+                        [styles.pagination__active]: page === currentPage,
                       },
                     )}
                     href={`#${page}`}
@@ -117,21 +117,21 @@ export const PaginationButtons: React.FC<Props> = ({
         }
         <li
           className={classNames(
-            styles.pagination_list,
+            styles.pagination__list,
             {
-              [styles.pagination_disabled]: currentPage === totalPages,
+              [styles.pagination__disabled]: currentPage === totalPages,
             },
           )}
         >
           <button className={classNames(
-            styles.pagination_button, 
-            styles.pagination_button__left_right
+            styles.pagination__button, 
+            styles.pagination__button_left_right
           )}
           >
             <a
               className={classNames(
-                styles.pagination_link,
-                styles.pagination_link__left_right
+                styles.pagination__link,
+                styles.pagination__link_left_right
               )}
               aria-disabled={currentPage === totalPages}
               data-page={currentPage + 1}

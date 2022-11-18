@@ -92,10 +92,10 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart, addOrRe
           </button>
           <button
             type="button"
-            className={classNames(
-              productCard.card__buttons_fav,
-              { [productCard.card__buttons_fav__added]: liked }
-            )}
+            className={`
+            ${productCard.card__buttons_fav} 
+            ${liked && productCard.card__buttons_fav__added}
+          `}
             onClick={() => addOrRemoveLiked(+id)}
           >
           </button>
