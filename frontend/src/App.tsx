@@ -51,7 +51,6 @@ const App: React.FC = () => {
         setProductsInCart(products.itemsInCart || []);
         setProductsFavor(products.itemsFavor || []);
       });
-    
   }, []);
 
   useEffect(() => {
@@ -174,7 +173,7 @@ const App: React.FC = () => {
               path="*"
               element={<h1 className="title">Page not found</h1>}
             />
-            <Route path="/" element={<HomePage />} />
+            <Route path="/" element={<HomePage addOrRemoveCart={addOrRemoveCart} addOrRemoveLiked={addOrRemoveLiked} />} />
             <Route path="home" element={<Navigate to="/" replace />} />
 
             <Route path="phones">

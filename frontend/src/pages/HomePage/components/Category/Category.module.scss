@@ -1,0 +1,166 @@
+@import '../../../../utils/mixins.scss';
+@import '../../styles/HomePage.module.scss';
+
+.category {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+  margin-bottom: 57px;
+
+  @include onTablet {
+    margin-bottom: 64px;
+  }
+
+  @include onDesktop {
+    margin-bottom: 80px;
+  }
+
+
+  &__title {
+    grid-column: 1 / -1;
+
+    font-family: 'Mont';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 22px;
+    line-height: 140%;
+
+    color: #313237;
+
+    @include onTablet {
+      font-size: 32px;
+      line-height: 128%;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    gap: 16px;
+    margin: auto;
+
+    @include onTablet {
+      flex-direction: row;
+      margin: 0;
+    }
+
+    &__item {
+      display: flex;
+      flex-direction: column;
+      transition: 0.3s;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      &__link {
+        text-decoration: none;
+
+        &__text {
+          font-family: 'Mont';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 26px;
+          margin-bottom: 4px;
+          color: #313237;
+          
+          @include onDesktop {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 26px;
+          }
+        }
+
+        &__count {
+          font-family: 'Mont';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 21px;
+          color: #89939A;
+        }
+
+        &__block {
+          width: 288px;
+          height: 288px;
+          margin-bottom: 24px;
+          position: relative;
+          overflow-x: hidden;
+          overflow-y: hidden;
+
+          @include onTablet {
+            width: 187px;
+            height: 187px;
+          }
+
+          @include onDesktop {
+            width: 368px;
+            height: 368px;
+          }
+
+          &_1 {
+            background: #6D6474;
+          }
+
+          &_2 {
+            background: #B4BDC4;
+          }
+
+          &_3 {
+            background: rgb(255, 55, 95)
+          }
+
+          &__img {
+            height: 100%;
+            object-fit: contain;
+            background-repeat: no-repeat;
+            background-size: contain;
+            position: absolute;
+            width: 300px;
+
+            &_phones {
+              background-image: url(../../../../images/category_phones.png);
+              left: 7px;
+
+              @include onTablet {
+                right: 2px;
+              }
+
+              @include onDesktop {
+                top: 60px;
+                left: 70px;
+              }
+            }
+
+            &_tablets {
+              background-image: url(../../../../images/tablet_category.png);
+              left: 2px;
+
+              @include onDesktop {
+                top: 68px;
+                left: 72px;
+              }
+            }
+
+            &_accessories {
+              background-image: url(../../../../images/accessories_category.png);
+              left: 5px;
+
+              @include onTablet {
+                left: 1px;
+              }
+
+              @include onDesktop {
+                top: 68px;
+                left: 70px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

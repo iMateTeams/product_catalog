@@ -24,7 +24,7 @@ app.use('/', (req, res, next) => {
 
   app.use(express.static('./public/'));
 
-  app.patch('/products/:id', (req, res) => {
+  app.patch('products/phones/:id', (req, res) => {
     const id = req.params.id;
     const data = req.body;
     const phones = JSON.parse(fs.readFileSync('./data/phones.json', 'utf-8'));
@@ -85,7 +85,34 @@ app.use('/', (req, res, next) => {
     
   });
 
+  // get all products with 14 in title
+
+  app.get('/products/bestprice', (req, res) => {
+    const phones = fs.readFileSync('./data/phones.json', 'utf-8');
+    const phonesArray = JSON.parse(phones);
+
+    const hottest = phonesArray.filter((phone) => {
+      if (phone.fullPrice) {
+        return phone.fullPrice - phone.price >= 80;
+      }
+
+      return false;
+    }).filter((phone) => phone.phoneId.includes('256'));
   
+    const hottestSorted = hottest.sort((a, b) => b.fullPrice - b.price - (a.fullPrice - a.price));
+
+    res.statusCode = 200;
+    res.send(hottestSorted);
+  });
+
+  app.get('/products/newest', (req, res) => {
+    const phones = fs.readFileSync('./data/phones.json', 'utf-8');
+    const phonesArray = JSON.parse(phones);
+    const phonesWith14 = phonesArray.filter((phone) => phone.phoneId.includes('14'));
+    const phonesWith11 = phonesArray.filter((phone) => phone.phoneId.includes('11'));
+    res.statusCode = 200;
+    res.send(phonesWith14.concat(phonesWith11));
+  });
 });
 
 app.listen(PORT, () => {

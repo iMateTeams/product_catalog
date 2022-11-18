@@ -1,0 +1,86 @@
+@import '../../../../utils/mixins.scss';
+@import '../../styles/HomePage.module.scss';
+
+.new_models {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: 16px;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 57px;
+
+  @include onTablet {
+    margin-bottom: 64px;
+  }
+
+  @include onDesktop {
+    margin-bottom: 80px;
+  }
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+
+
+    &_title {
+      grid-column: 1 / -1;
+  
+      font-family: 'Mont';
+      font-style: normal;
+      font-weight: 800;
+      font-size: 22px;
+      line-height: 140%;
+
+      color: #313237;
+
+      @include onTablet {
+        font-size: 32px;
+        line-height: 128%;
+      }
+    }
+
+    &__button {
+      grid-column: 1 / -1;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 16px;
+      flex-direction: row;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &_left {
+        background-image: url(../../../../images/ArrowLeft.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+
+      &_right {
+        background-image: url(../../../../images/VectorArrowRight.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+      }
+    }
+  }
+
+  &__list {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 18px;
+    contain: content;
+    flex-direction: row;
+  }
+}
+
+.button {
+  width: 32px;
+  height: 32px;
+  align-self: center;
+
+  border: 1px solid #B4BDC4;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
