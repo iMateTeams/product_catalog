@@ -11,11 +11,11 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 
 type Props = {
-  addOrRemoveCart: (id: number) => void;
-  addOrRemoveLiked: (id: number) => void;
+  handleAddToCart: (product: Product) => void;
+  handleAddToFavorites: (product: Product) => void;
 }
 
-export const HotPrices: React.FC<Props> = ({ addOrRemoveCart, addOrRemoveLiked }) => {
+export const HotPrices: React.FC<Props> = ({ handleAddToCart, handleAddToFavorites }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
@@ -81,8 +81,8 @@ export const HotPrices: React.FC<Props> = ({ addOrRemoveCart, addOrRemoveLiked }
             <SwiperSlide key={product.id}>
               <ProductCard
                 product={product}
-                addOrRemoveCart={addOrRemoveCart}
-                addOrRemoveLiked={addOrRemoveLiked}
+                handleAddToCart={handleAddToCart}
+                handleAddToFavorites={handleAddToFavorites}
                 key={product.id}
               />
             </SwiperSlide>

@@ -9,35 +9,35 @@ import home from '../../images/home.svg';
 import arrow_right from '../../images/ArrowRight.svg';
 import { SortBy } from '../../types/SortBy';
 import { Loader } from '../../components/Loader';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 type Props = {
-  products: Product[];
   currentPage: number;
   setCurrentPage: (num: number) => void;
   phonesPerPage: number;
   setPhonesPerPage: (num: number) => void;
-  addOrRemoveCart: (id: number) => void;
-  dataAmount: number;
-  addOrRemoveLiked: (id: number) => void;
-  sortBy:SortBy | string;
+  handleAddToCart: (product: Product) => void;
+  handleAddToFavorites: (product: Product) => void;
+  sortBy: SortBy | string;
   setSortBy: (sort: SortBy | string) => void;
-  isLoad: boolean;
 };
 
 export const CatalogPage: React.FC<Props>
   = ({
-    products,
     currentPage,
     setCurrentPage,
     phonesPerPage,
     setPhonesPerPage,
-    addOrRemoveCart,
-    dataAmount,
-    addOrRemoveLiked,
+    handleAddToCart,
+    handleAddToFavorites,
     sortBy,
     setSortBy,
-    isLoad,
   }) => {
+    const dispatch = useAppDispatch();
+    const products = useAppSelector(state => state.products.items);
+    const isLoadind = useAppSelector(state => state.products.loading);
+    const dataLength = useAppSelector(state => state.products.dataLength);
+
 
     return (
       <section className={phonePage.phones}>
@@ -54,17 +54,17 @@ export const CatalogPage: React.FC<Props>
           <h1 className={phonePage.phones__title}>
             Mobile Phones
           </h1>
-          {!isLoad 
+          {isLoadind
             ? <Loader />
             : (<>
 
               <p className={phonePage.phones__count}>
-                {dataAmount} models
+                {dataLength} models
               </p>
       
               <div className={phonePage.phones__sort}>
                 <PaginationPerPage
-                  dataAmount={dataAmount}
+                  dataLength={dataLength}
                   phonesPerPage={phonesPerPage}
                   setPhonesPerPage={setPhonesPerPage}
                   setCurrentPage={setCurrentPage}
@@ -78,8 +78,8 @@ export const CatalogPage: React.FC<Props>
                   return (
                     <ProductCard
                       product={product}
-                      addOrRemoveCart={addOrRemoveCart}
-                      addOrRemoveLiked={addOrRemoveLiked}
+                      handleAddToCart={handleAddToCart}
+                      handleAddToFavorites={handleAddToFavorites}
                       key={product.id}
                     />
                   );
@@ -90,7 +90,7 @@ export const CatalogPage: React.FC<Props>
                 phonesPerPage={phonesPerPage}
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
-                dataAmount={dataAmount}
+                dataLength={dataLength}
               />
             
             </>

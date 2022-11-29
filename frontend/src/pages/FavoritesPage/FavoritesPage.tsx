@@ -6,20 +6,22 @@ import home from '../../images/home.svg';
 import arrow_right from '../../images/ArrowRight.svg';
 import { Loader } from '../../components/Loader';
 import { ProductCard } from '../../components/ProductCard';
+import { useAppSelector } from '../../app/hooks';
 
 type Props = {
-  products: Product[];
-  addOrRemoveCart: (id: number) => void;
-  addOrRemoveLiked: (id: number) => void;
-  isLoad: boolean;
+  handleAddToCart: (product: Product) => void;
+  handleAddToFavorites: (product: Product) => void;
 };
 
 export const FavoritesPage:React.FC<Props> = ({
-  products,
-  addOrRemoveCart,
-  addOrRemoveLiked,
-  isLoad,
+  handleAddToCart,
+  handleAddToFavorites,
 }) => {
+  const products = useAppSelector(state => state.products.items);
+  const isLoading = useAppSelector(state => state.products.loading);
+
+  const favorites = products.filter(product => product?.liked);
+
   return (
     <section className={phonePage.phones}>
       <div className={phonePage.container}>
@@ -35,19 +37,19 @@ export const FavoritesPage:React.FC<Props> = ({
         <h1 className={phonePage.phones__title}>
           Favorites
         </h1>
-        {!isLoad 
+        {isLoading
           ? <Loader />
           : (<>
             <p className={phonePage.phones__count}>
-              {products.length} models
+              {favorites.length} models
             </p>
             <div className={phonePage.phones__cards}>
-              {products.map(product => {
+              {favorites.map(product => {
                 return (
                   <ProductCard
                     product={product}
-                    addOrRemoveCart={addOrRemoveCart}
-                    addOrRemoveLiked={addOrRemoveLiked}
+                    handleAddToCart={handleAddToCart}
+                    handleAddToFavorites={handleAddToFavorites}
                     key={product.id}
                   />
                 );

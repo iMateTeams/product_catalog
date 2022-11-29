@@ -14,9 +14,7 @@
     "year": 2016,
     "image": "img/phones/apple-iphone-7/black/00.jpg",
     "inCart": false,
-    "liked": {
-      "liked": false
-    }
+    "liked": true
   },
   {
     "id": "2",
@@ -33,9 +31,7 @@
     "year": 2016,
     "image": "img/phones/apple-iphone-7-plus/black/00.jpg",
     "inCart": false,
-    "liked": {
-      "liked": true
-    }
+    "liked": true
   },
   {
     "id": "3",
@@ -51,7 +47,6 @@
     "ram": "2GB",
     "year": 2017,
     "image": "img/phones/apple-iphone-8/gold/00.jpg",
-    "inCard": true,
     "inCart": true
   },
   {

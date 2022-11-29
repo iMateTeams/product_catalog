@@ -9,7 +9,7 @@ type Props = {
   phonesPerPage: number;
   currentPage: number;
   setCurrentPage: (page: number) => void;
-  dataAmount: number;
+  dataLength: number;
 };
 
 function getButtons(start: number, finish: number): number[] {
@@ -26,9 +26,9 @@ export const PaginationButtons: React.FC<Props> = ({
   phonesPerPage,
   currentPage,
   setCurrentPage,
-  dataAmount,
+  dataLength,
 }) => {
-  const totalPages = Math.ceil(dataAmount / phonesPerPage);
+  const totalPages = Math.ceil(dataLength / phonesPerPage);
 
 
   const handlePageNumberClick = (event: React.MouseEvent<HTMLAnchorElement>) => {

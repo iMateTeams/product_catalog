@@ -5,13 +5,16 @@ import { Product } from '../../types/Product';
 
 type Props = {
   product: Product;
-  addOrRemoveCart: (id: number) => void;
-  addOrRemoveLiked: (id: number) => void;
+  handleAddToCart: (product: Product) => void;
+  handleAddToFavorites: (product: Product) => void;
 }
 
-export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart, addOrRemoveLiked }) => {
+export const ProductCard: React.FC<Props> = ({
+  product,
+  handleAddToCart,
+  handleAddToFavorites
+}) => {
   const {
-    id,
     name,
     fullPrice,
     price,
@@ -23,13 +26,11 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart, addOrRe
     liked,
   } = product;
 
- 
-
   const [img, setImg] = useState('');
 
   useEffect(() => {
-    fetch(`https://i-mate-teams-product-catalog.herokuapp.com/${image}`)
-    // fetch(`http://localhost:4002/${image}`)
+    // fetch(`https://i-mate-teams-product-catalog.herokuapp.com/${image}`)
+    fetch(`http://localhost:4002/${image}`)
       .then(response => response.blob())
       .then(blob => {
         const url = URL.createObjectURL(blob);
@@ -41,7 +42,7 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart, addOrRe
   return (
     <section className={productCard.card}>
       <div className={productCard.card__content}>
-        <img src={img}  alt="phoneImage" className={productCard.card__image} />
+        <img src={img} alt="phoneImage" className={productCard.card__image} />
         <div className={productCard.card__name}>
           {name}
         </div>
@@ -86,9 +87,9 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart, addOrRe
               ${productCard.card__buttons_cart} 
               ${inCart && productCard.card__buttons_cart__added}
             `}
-            onClick={() => addOrRemoveCart(+id)}
+            onClick={() => handleAddToCart(product)}
           >
-            {inCart ? 'Added' :'Add to cart'}
+            {inCart ? 'Added' : 'Add to cart'}
           </button>
           <button
             type="button"
@@ -96,7 +97,7 @@ export const ProductCard: React.FC<Props> = ({ product, addOrRemoveCart, addOrRe
             ${productCard.card__buttons_fav} 
             ${liked && productCard.card__buttons_fav__added}
           `}
-            onClick={() => addOrRemoveLiked(+id)}
+            onClick={() => handleAddToFavorites(product)}
           >
           </button>
         </div>

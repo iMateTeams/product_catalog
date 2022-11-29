@@ -1,20 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import styleCart from '../../pages/CartPage/CartPage.module.scss';
 
 import { Product } from '../../types/Product';
+import { removeFromCart } from '../../features/products/productsSlice';
 
 type Props = {
   product: Product;
-  removeFromCart: (id: number) => void;
-  countPlus: (id: number) => void;
-  countMinus: (id: number) => void;
 }
 
 export const ProductInCart: React.FC<Props> = ({
   product,
-  removeFromCart,
-  countPlus,
-  countMinus,
 }) => {
   const [img, setImg] = useState('');
 
@@ -25,14 +20,14 @@ export const ProductInCart: React.FC<Props> = ({
         const url = URL.createObjectURL(blob);
         setImg(url);
       });
-  }, [product.image]);
+  }, []);
 
   return (
     <li className={styleCart.cart_product} >
       <div className={styleCart.cart_product__first}>
         <button 
           className={styleCart.cart_product__button_del}
-          onClick={() => removeFromCart(+product.id)}
+          onClick={() => removeFromCart(product)}
         >
           {'x'}
         </button>
@@ -45,7 +40,7 @@ export const ProductInCart: React.FC<Props> = ({
         <div className={styleCart.cart_product__count_box}>
           <button 
             className={styleCart.cart_product__button}
-            onClick={() => countMinus(+product.id)}
+            // onClick={() => countMinus(+product.id)}
             disabled={product.count === 1}
           >
             {'-'}
@@ -55,7 +50,7 @@ export const ProductInCart: React.FC<Props> = ({
           </div>
           <button 
             className={styleCart.cart_product__button}
-            onClick={() => countPlus(+product.id)}
+            // onClick={() => countPlus(+product.id)}
           >
             {'+'}
           </button>

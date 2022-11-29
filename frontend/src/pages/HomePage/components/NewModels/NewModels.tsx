@@ -10,23 +10,30 @@ import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 
+import { useAppSelector, useAppDispatch } from '../../../../app/hooks';
+import { getNewModels } from '../../../../features/products/productsSlice';
+
 type Props = {
-  addOrRemoveCart: (id: number) => void;
-  addOrRemoveLiked: (id: number) => void;
+  handleAddToCart: (product: Product) => void;
+  handleAddToFavorites: (product: Product) => void;
 }
 
-export const NewModels: React.FC<Props> = ({ addOrRemoveCart, addOrRemoveLiked }) => {
-  const [products, setProducts] = useState<Product[]>([]);
+export const NewModels: React.FC<Props> = ({ handleAddToCart, handleAddToFavorites }) => {
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
 
   SwiperCore.use([Navigation]);
+  
+  const dispatch = useAppDispatch();
+  const newModels = useAppSelector(state => state.products.newModels);
+
+  const getNew = async () => {
+    const newProducts = await getNewest();
+    dispatch(getNewModels(newProducts));
+  };
 
   useEffect(() => {
-    getNewest()
-      .then((products) => {
-        setProducts(products);
-      });
+    getNew();
   }, []);
 
   const handleNext = () => {
@@ -77,12 +84,12 @@ export const NewModels: React.FC<Props> = ({ addOrRemoveCart, addOrRemoveLiked }
             nextEl: navigationNextRef.current,
           }}
         >
-          {products.map(product => (
+          {newModels.map(product => (
             <SwiperSlide key={product.id}>
               <ProductCard
                 product={product}
-                addOrRemoveCart={addOrRemoveCart}
-                addOrRemoveLiked={addOrRemoveLiked}
+                handleAddToCart={handleAddToCart}
+                handleAddToFavorites={handleAddToFavorites}
                 key={product.id}
               />
             </SwiperSlide>

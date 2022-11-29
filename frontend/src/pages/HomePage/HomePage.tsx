@@ -9,13 +9,14 @@ import { HotPrices } from './components/HotPrices';
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
+import { Product } from '../../types/Product';
 
 type Props = {
-  addOrRemoveCart: (id: number) => void;
-  addOrRemoveLiked: (id: number) => void;
+  handleAddToCart: (product: Product) => void;
+  handleAddToFavorites: (product: Product) => void;
 }
 
-export const HomePage: React.FC<Props> = ({ addOrRemoveCart, addOrRemoveLiked }) => {
+export const HomePage: React.FC<Props> = ({ handleAddToCart, handleAddToFavorites }) => {
   const [currentPage, setCurrentPage] = React.useState(1);
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
@@ -33,6 +34,8 @@ export const HomePage: React.FC<Props> = ({ addOrRemoveCart, addOrRemoveLiked })
     } else if (direction === 'next') {
       setCurrentPage((prev) => prev + 1);
     }
+
+    console.log(currentPage);
   };
 
   return (
@@ -57,6 +60,8 @@ export const HomePage: React.FC<Props> = ({ addOrRemoveCart, addOrRemoveLiked })
               prevEl: navigationPrevRef.current,
               nextEl: navigationNextRef.current,
             }}
+            loop={true}
+            spaceBetween={50}
           >
             <SwiperSlide>
               <div className={style.news_carousel__banner}>
@@ -146,13 +151,13 @@ export const HomePage: React.FC<Props> = ({ addOrRemoveCart, addOrRemoveLiked })
         </ul>
       </div>
       <NewModels
-        addOrRemoveCart={addOrRemoveCart}
-        addOrRemoveLiked={addOrRemoveLiked}
+        handleAddToCart={handleAddToCart}
+        handleAddToFavorites={handleAddToFavorites}
       />
       <Category />
       <HotPrices
-        addOrRemoveCart={addOrRemoveCart}
-        addOrRemoveLiked={addOrRemoveLiked}
+        handleAddToCart={handleAddToCart}
+        handleAddToFavorites={handleAddToFavorites}
       />
     </div>
   );

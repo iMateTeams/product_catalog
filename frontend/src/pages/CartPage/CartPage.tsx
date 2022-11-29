@@ -3,31 +3,20 @@ import { Product } from '../../types/Product';
 import styleCart from './CartPage.module.scss';
 import arrow_left from '../../images/ArrowLeft.svg';
 import { ProductInCart } from '../../components/ProductInCart';
+import { useAppSelector, useAppDispatch } from '../../app/hooks';
+import { clearCart } from '../../features/products/productsSlice';
 
-
-
-type Props = {
-  products: Product[];
-  removeFromCart: (id: number) => void;
-  countPlus: (id: number) => void;
-  countMinus: (id: number) => void;
-  totalPrice: number;
-  clearCart: (items:Product[]) => void;
-}
-
-export const CartPage: React.FC<Props> = ({ 
-  products,
-  removeFromCart,
-  countPlus,
-  countMinus,
-  totalPrice,
-  clearCart,
-}) => {
+export const CartPage: React.FC = () => {
   const [isCheck, setCheckout] = useState(false);
+
+  const cart = useAppSelector(state => state.products.itemsInCart);
+  const products = useAppSelector(state => state.products.items);
+  const totalPrice = useAppSelector(state => state.products.totalCartPrice);
+  const dispatch = useAppDispatch();
 
   const clearCartOnClick = () => {
     setCheckout(false);
-    clearCart(products);
+    dispatch(clearCart());
   };
   const saveCartOnClick = () => {
     setCheckout(false);
@@ -50,10 +39,8 @@ export const CartPage: React.FC<Props> = ({
             { products.map(product => (
               <ProductInCart
                 product={product} 
-                removeFromCart={removeFromCart}
-                countPlus={countPlus}
-                countMinus={countMinus}
-                key={product.id}/>
+                key={product.id}
+              />
             ))}
             
           </ul>

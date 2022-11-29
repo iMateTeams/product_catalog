@@ -1,120 +1,91 @@
-const express = require('express');
-const fs = require('fs');
-// const path = require('path');
-const cors = require('cors');
+
+import express, { Express, Request, Response } from 'express';
+import { Phone } from './types';
+import cors from 'cors';
+import path from 'path';
+import phones from '../data/phones.json';
+import { fileURLToPath } from 'url';
 
 const PORT = process.env.PORT || 4002;
 
-const app = express();
-
 const SortBy = {
-  age :'Newest',
-  title :'Alphabetically',
-  price :'Cheapest',
+  age: 'Newest',
+  title: 'Alphabetically',
+  price: 'Cheapest',
 };
 
+const app: Express = express();
+
+app.use(cors());
+
 app.use('/', (req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
   next();
 
-  app.use(cors());
 
   app.use(express.json());
 
   app.use(express.static('./public/'));
 
-  app.patch('products/phones/:id', (req, res) => {
-    const id = req.params.id;
-    const data = req.body;
-    const phones = JSON.parse(fs.readFileSync('./data/phones.json', 'utf-8'));
-    const phone = phones.find((phone) => phone.id === id);
+  app.use('/static', express.static(path.join(__dirname, '../public')));
 
-    if (phone && Object.prototype.hasOwnProperty.call(data, 'inCart')) {
-      phone.inCart = data.inCart;
-      fs.writeFileSync('./data/phones.json', JSON.stringify(phones));
-      res.status(200).json(phone);
-    }
-
-    if (phone && Object.prototype.hasOwnProperty.call(data, 'count')) {
-      phone.count = data.count;
-      fs.writeFileSync('./data/phones.json', JSON.stringify(phones));
-      res.status(200).json(phone);
-    }
-
-    if (phone && Object.prototype.hasOwnProperty.call(data, 'liked')) {
-      phone.liked = data.liked;
-      fs.writeFileSync('./data/phones.json', JSON.stringify(phones));
-      res.status(200).json(phone);
-    } else {
-      res.status(404).json({ message: 'Phone not found' });
-    }
-  });
-
-  app.get('/products', (req, res) => {
-    const numberOfItems = req.query._limit;
-    const currentPage = req.query._page;
-    const sortBy = req.query._sort;
-    let phones = JSON.parse(fs.readFileSync('./data/phones.json', 'utf-8'));
-    // console.log([...phones].sort((prod1,prod2) => prod1.year - prod2.year));
-
-    switch (sortBy) {
-    case SortBy.age :
-      phones = [...phones].sort((prod1,prod2) => prod2.year - prod1.year);
-      break;
-    case SortBy.title :
-      phones = [...phones].sort((prod1,prod2) => (prod1.title - prod2.title));
-      break;
-    case SortBy.price :
-      phones = [...phones].sort((prod1,prod2) => prod1.price- prod2.price);
-      break;
-    default:
-      0;
-    }
-
-    const items = [...phones].splice((currentPage - 1) * numberOfItems, numberOfItems * currentPage);
-  
+  app.get('/phones', (req: Request, res: Response) => {
+    const { _limit, _page, _sort } = req.query;
+    const limit = Number(_limit);
+    const page = Number(_page);
+    const sort = _sort as keyof typeof SortBy;
+    const startIndex = (page - 1) * limit;
+    const endIndex = page * limit;
+    const resultPhones = phones.slice(startIndex, endIndex);
     res.statusCode = 200;
-
     res.send({
-      items: items,
+      items: resultPhones,
       dataLength: phones.length,
-      itemsInCart:[...phones].filter(phone => phone.inCart === true),
-      itemsFavor:[...phones].filter(phone => phone.liked === true),
+      itemsInCart: phones.filter((phone) => phone.inCart),
+      itemsLiked: phones.filter((phone) => phone.liked),
     });
-    
   });
 
-  // get all products with 14 in title
-
-  app.get('/products/bestprice', (req, res) => {
-    const phones = fs.readFileSync('./data/phones.json', 'utf-8');
-    const phonesArray = JSON.parse(phones);
-
-    const hottest = phonesArray.filter((phone) => {
-      if (phone.fullPrice) {
-        return phone.fullPrice - phone.price >= 80;
-      }
-
-      return false;
-    }).filter((phone) => phone.phoneId.includes('256'));
-  
-    const hottestSorted = hottest.sort((a, b) => b.fullPrice - b.price - (a.fullPrice - a.price));
+  app.get('/phones/new', (req: Request, res: Response) => {
+    const newPhones = [...phones]
+      .sort((a: { year: number }, b: { year: number }) => b.year - a.year)
+      .slice(0, 10);
 
     res.statusCode = 200;
-    res.send(hottestSorted);
+    res.send(newPhones);
   });
 
-  app.get('/products/newest', (req, res) => {
-    const phones = fs.readFileSync('./data/phones.json', 'utf-8');
-    const phonesArray = JSON.parse(phones);
-    const phonesWith14 = phonesArray.filter((phone) => phone.phoneId.includes('14'));
-    const phonesWith11 = phonesArray.filter((phone) => phone.phoneId.includes('11'));
+  app.get('/phones/discount', (req: Request, res: Response) => {
+    const discountPhones = [...phones]
+      .sort(
+        (
+          a: { fullPrice: number; price: number },
+          b: { fullPrice: number; price: number }
+        ) => b.fullPrice - b.price - (a.fullPrice - a.price)
+      )
+      .slice(0, 10);
+
     res.statusCode = 200;
-    res.send(phonesWith14.concat(phonesWith11));
+    res.send(discountPhones);
+  });
+
+  app.put('/phones/update/:id', (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { liked, inCart } = req.body;
+    const phone = phones.find((phone) => +phone.id === +id);
+    if (phone) {
+      phone.liked = liked;
+      phone.inCart = inCart;
+      res.statusCode = 200;
+      res.send(phone);
+    } else {
+      res.statusCode = 404;
+      res.send('Not found');
+    }
   });
 });
 
 app.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
+  // open(`http://localhost:${PORT}`);
+  console.log(`Server is running on port ${PORT}`);
 });

@@ -4,7 +4,7 @@ import styles from './Pagination.module.scss';
 
 
 type Props = {
-  dataAmount: number;
+  dataLength: number;
   phonesPerPage: number
   setPhonesPerPage: (num: number) => void;
   setCurrentPage: (num: number) => void;
@@ -13,7 +13,7 @@ type Props = {
 }
 
 export const PaginationPerPage: React.FC<Props> = ({
-  dataAmount,
+  dataLength,
   phonesPerPage,
   setPhonesPerPage,
   setCurrentPage,
@@ -61,7 +61,7 @@ export const PaginationPerPage: React.FC<Props> = ({
             <option value="16" className={styles.pagination__page_sort}>16</option>
             <option value="32" className={styles.pagination__page_sort}>32</option>
             <option value="50" className={styles.pagination__page_sort}>50</option>
-            <option value={dataAmount} className={styles.pagination__page_sort}>ALL</option>
+            <option value={dataLength} className={styles.pagination__page_sort}>ALL</option>
           </select>
         </div>
       </div>

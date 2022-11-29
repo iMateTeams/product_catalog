@@ -1,13 +1,14 @@
 import axios from 'axios';
+import { response } from 'express';
 import { SortBy } from '../types/SortBy';
 
 
-const baseUrl = 'https://i-mate-teams-product-catalog.herokuapp.com/products';
+// const baseUrl = 'https://i-mate-teams-product-catalog.herokuapp.com/phones';
 
-// const baseUrl = 'http://localhost:4002/products';
-const phonesUrl = `${baseUrl}/phones`;
-const newestUrl = `${baseUrl}/newest`;
-const bestPriceUrl = `${baseUrl}/bestprice`;
+const baseUrl = 'http://localhost:4002/phones';
+const updateUrl = `${baseUrl}/update`;
+const newestUrl = `${baseUrl}/new`;
+const discountUrl = `${baseUrl}/discount`;
 
 export const getPart = async (numberOfItems: number, currentPage: number, sortBy: SortBy | string) => {
   const response = await axios.get(`${baseUrl}?_limit=${numberOfItems}&_page=${currentPage}&_sort=${sortBy}`);
@@ -17,8 +18,8 @@ export const getPart = async (numberOfItems: number, currentPage: number, sortBy
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const update = async (id: number, data: any) => {
-  await axios.patch(`${baseUrl}/${id}`, data);
-  console.log(data);
+  const response = await axios.put(`${updateUrl}/${id}`, data);
+  return response.data;
 };
 
 export const getNewest = async () => {
@@ -27,7 +28,7 @@ export const getNewest = async () => {
 };
 
 export const getBestPrice = async () => {
-  const response = await axios.get(bestPriceUrl);
+  const response = await axios.get(discountUrl);
   return response.data;
 };
 
