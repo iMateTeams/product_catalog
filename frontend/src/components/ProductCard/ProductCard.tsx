@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import classNames from 'classnames';
 import productCard from './ProductCard.module.scss';
 import { Product } from '../../types/Product';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { handleAddToCart } from '../../features/products/productsSlice';
 
 type Props = {
   product: Product;
-  handleAddToCart: (product: Product) => void;
+  // handleAddToCart: (product: Product) => void;
   handleAddToFavorites: (product: Product) => void;
 }
 
 export const ProductCard: React.FC<Props> = ({
   product,
-  handleAddToCart,
+  // handleAddToCart,
   handleAddToFavorites
 }) => {
   const {
@@ -28,6 +30,10 @@ export const ProductCard: React.FC<Props> = ({
 
   const [img, setImg] = useState('');
 
+  const dispatch = useAppDispatch();
+  const productsInCart = useAppSelector(state => state.products.itemsInCart);
+  const products = useAppSelector(state => state.products.items);
+
   useEffect(() => {
     // fetch(`https://i-mate-teams-product-catalog.herokuapp.com/${image}`)
     fetch(`http://localhost:4002/${image}`)
@@ -36,8 +42,7 @@ export const ProductCard: React.FC<Props> = ({
         const url = URL.createObjectURL(blob);
         setImg(url);
       });
-  }, [image]);
-
+  }, [image]);  
 
   return (
     <section className={productCard.card}>
@@ -87,7 +92,7 @@ export const ProductCard: React.FC<Props> = ({
               ${productCard.card__buttons_cart} 
               ${inCart && productCard.card__buttons_cart__added}
             `}
-            onClick={() => handleAddToCart(product)}
+            onClick={() => dispatch(handleAddToCart(product))}
           >
             {inCart ? 'Added' : 'Add to cart'}
           </button>

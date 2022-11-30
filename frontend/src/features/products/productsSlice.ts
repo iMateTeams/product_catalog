@@ -1,7 +1,9 @@
 import { Product } from '../../types/Product';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { bindActionCreators, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AppThunkAction } from '../../app/store';
 import { getNewest } from '../../api/products';
+import { getPart, update } from '../../api/products';
+import { useAppDispatch } from '../../app/hooks';
 
 export interface ProductsState {
   items: Product[];
@@ -86,6 +88,29 @@ export const productsSlice = createSlice({
     },
     getNewModels(state, action: PayloadAction<Product[]>) {
       state.newModels = action.payload;
+    },
+    handleAddToCart(state, action: PayloadAction<Product>) {
+      const { id } = action.payload;
+      const existingProduct = state.items.find((product) => product.id === id);
+      if (existingProduct) {
+        updateProductStart();
+
+        if (existingProduct.inCart) {
+          update(+id, { inCart: false}).then((res) => {
+            updateProductSuccess(res.data);
+          });
+        } else {
+          update(+id, { inCart: true}).then((res) => {
+            updateProductSuccess(res.data);
+          });
+        }
+
+        state.itemsInCart = [...state.itemsInCart, existingProduct];
+        state.totalCartPrice = state.itemsInCart.reduce(
+          (acc, product) => acc + product.price,
+          0
+        );
+      }
     }
   },
 });
@@ -101,6 +126,7 @@ export const {
   clearCart,
   removeFromCart,
   getNewModels,
+  handleAddToCart,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

@@ -78,7 +78,7 @@ export const CatalogPage: React.FC<Props>
                   return (
                     <ProductCard
                       product={product}
-                      handleAddToCart={handleAddToCart}
+                      // handleAddToCart={handleAddToCart}
                       handleAddToFavorites={handleAddToFavorites}
                       key={product.id}
                     />
@@ -91,8 +91,7 @@ export const CatalogPage: React.FC<Props>
                 currentPage={currentPage}
                 setCurrentPage={setCurrentPage}
                 dataLength={dataLength}
-              />
-            
+              />  
             </>
             )
           }

@@ -81,7 +81,7 @@ export const HotPrices: React.FC<Props> = ({ handleAddToCart, handleAddToFavorit
             <SwiperSlide key={product.id}>
               <ProductCard
                 product={product}
-                handleAddToCart={handleAddToCart}
+                // handleAddToCart={handleAddToCart}
                 handleAddToFavorites={handleAddToFavorites}
                 key={product.id}
               />

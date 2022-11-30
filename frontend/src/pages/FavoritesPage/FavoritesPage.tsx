@@ -48,7 +48,7 @@ export const FavoritesPage:React.FC<Props> = ({
                 return (
                   <ProductCard
                     product={product}
-                    handleAddToCart={handleAddToCart}
+                    // handleAddToCart={handleAddToCart}
                     handleAddToFavorites={handleAddToFavorites}
                     key={product.id}
                   />

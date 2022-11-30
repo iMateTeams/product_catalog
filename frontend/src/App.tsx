@@ -163,7 +163,8 @@ const App: React.FC = () => {
                 <FavoritesPage
                   handleAddToCart={handleAddToCart}
                   handleAddToFavorites={handleAddToFavorites}
-                />} />
+                />} 
+              />
             </Route>
           </Routes>
         </div>
