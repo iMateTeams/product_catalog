@@ -25,6 +25,10 @@
 
       color: #313237;
 
+      -webkit-user-select: none; /* Safari */
+      -ms-user-select: none; /* IE 10 and IE 11 */
+      user-select: none;
+
       @include onTablet {
         font-size: 32px;
         line-height: 128%;

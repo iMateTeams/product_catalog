@@ -13,6 +13,9 @@
   letter-spacing: -0.01em;
   color: #313237;
   margin: 24px 0 8px 0;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none;
 
   @include onTablet {
     margin: 32px 0 16px 0;

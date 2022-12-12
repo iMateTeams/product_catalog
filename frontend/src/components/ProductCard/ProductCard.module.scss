@@ -1,7 +1,8 @@
 @import '../../utils/vars.scss';
+@import '../../utils/mixins.scss';
 
 .card {
-  width: 272px;
+  max-width: 272px;
   display: flex;
   flex-direction: column;
   border: 1px solid $elements-color-light-gray;

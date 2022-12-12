@@ -1,9 +1,6 @@
 import { Product } from '../../types/Product';
-import { bindActionCreators, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AppThunkAction } from '../../app/store';
-import { getNewest } from '../../api/products';
-import { getPart, update } from '../../api/products';
-import { useAppDispatch } from '../../app/hooks';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { update } from '../../api/products';
 
 export interface ProductsState {
   items: Product[];
@@ -11,9 +8,12 @@ export interface ProductsState {
   itemsInCart: Product[];
   itemsLiked: Product[];
   totalCartPrice: number;
-  loading: boolean;
+  loadingMainData: boolean;
+  loadingCartData: boolean;
+  loadingLikedData: boolean;
   error: string | null;
   newModels: Product[];
+  hotPrices: Product[];
 }
 
 const initialState: ProductsState = {
@@ -22,9 +22,12 @@ const initialState: ProductsState = {
   itemsInCart: [],
   itemsLiked: [],
   totalCartPrice: 0,
-  loading: false,
+  loadingMainData: false,
   error: null,
   newModels: [],
+  hotPrices: [],
+  loadingCartData: false,
+  loadingLikedData: false,
 };
 
 export const productsSlice = createSlice({
@@ -32,86 +35,77 @@ export const productsSlice = createSlice({
   initialState,
   reducers: {
     getProductsStart(state) {
-      state.loading = true;
+      state.loadingMainData = true;
     },
+
     getProductsSuccess(state, action: PayloadAction<ProductsState>) {
       state.items = action.payload.items;
       state.dataLength = action.payload.dataLength;
       state.itemsInCart = action.payload.itemsInCart;
       state.itemsLiked = action.payload.itemsLiked;
-      state.loading = false;
+      state.loadingMainData = false;
       state.error = null;
     },
-    getProductsFailure(state, action: PayloadAction<string>) {
-      state.loading = false;
-      state.error = action.payload;
-    },
-    updateProductStart(state) {
-      state.loading = true;
-    },
-    updateProductSuccess(state, action: PayloadAction<Product>) {
-      const { id, inCart, liked } = action.payload;
-      const existingProduct = state.items.find((product) => product.id === id);
-      if (existingProduct) {
-        existingProduct.inCart = inCart;
-        existingProduct.liked = liked;
-      }
-      state.loading = false;
-      state.error = null;
 
-      getNewest().then((res) => {
-        state.newModels = res.data;
-      }
-      );
-    },
-    updateProductFailure(state, action: PayloadAction<string>) {
-      state.loading = false;
+    getProductsFailure(state, action: PayloadAction<string>) {
+      state.loadingMainData = false;
       state.error = action.payload;
     },
+
+    updateProductSuccess(state, action: PayloadAction<Product>) {
+      const index = state.items.findIndex((item) => item.id === action.payload.id);
+      state.items[index] = action.payload;
+
+      console.log('cartLengthBeforeUpdate', state.itemsInCart.length);
+
+      if (action.payload.inCart) {
+        state.itemsInCart.push(action.payload);
+      } else {
+        state.itemsInCart = state.itemsInCart.filter((item) => +item.id !== +action.payload.id);
+      }
+
+      console.log('cartLengthBeforeUpdate', state.itemsInCart.length);
+    },
+
+    updateProductFailure(state, action: PayloadAction<string>) {
+      state.loadingMainData = false;
+      state.error = action.payload;
+    },
+
     updateTotalCartPrice(state) {
       state.totalCartPrice = state.itemsInCart.reduce(
         (acc, product) => acc + product.price,
         0
       );
     },
+
     clearCart(state) {
       state.itemsInCart = [];
       state.totalCartPrice = 0;
     },
-    removeFromCart(state, action: PayloadAction<Product>) {
-      const { id } = action.payload;
-      state.itemsInCart = state.itemsInCart.filter((product) => product.id !== id);
-      state.totalCartPrice = state.itemsInCart.reduce(
-        (acc, product) => acc + product.price,
-        0
-      );
-    },
-    getNewModels(state, action: PayloadAction<Product[]>) {
-      state.newModels = action.payload;
-    },
+
     handleAddToCart(state, action: PayloadAction<Product>) {
       const { id } = action.payload;
-      const existingProduct = state.items.find((product) => product.id === id);
-      if (existingProduct) {
-        updateProductStart();
-
-        if (existingProduct.inCart) {
-          update(+id, { inCart: false}).then((res) => {
-            updateProductSuccess(res.data);
-          });
-        } else {
-          update(+id, { inCart: true}).then((res) => {
-            updateProductSuccess(res.data);
-          });
-        }
-
-        state.itemsInCart = [...state.itemsInCart, existingProduct];
-        state.totalCartPrice = state.itemsInCart.reduce(
-          (acc, product) => acc + product.price,
-          0
-        );
+  
+      try {
+        update(+id, action.payload);
+      } catch (error) {
+        console.log(error);
       }
-    }
+    },
+
+    handleAddToLiked(state, action: PayloadAction<Product>) {
+      console.log('likedLengthBeforeUpdate', state.itemsLiked.length);
+      console.log(action);
+    },
+
+    setHotPrices(state, action: PayloadAction<Product[]>) {
+      state.hotPrices = action.payload;
+    },
+
+    setNewModels(state, action: PayloadAction<Product[]>) {
+      state.newModels = action.payload;
+    },
   },
 });
 
@@ -119,14 +113,14 @@ export const {
   getProductsStart,
   getProductsSuccess,
   getProductsFailure,
-  updateProductStart,
   updateProductSuccess,
   updateProductFailure,
   updateTotalCartPrice,
   clearCart,
-  removeFromCart,
-  getNewModels,
   handleAddToCart,
+  handleAddToLiked,
+  setHotPrices,
+  setNewModels,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

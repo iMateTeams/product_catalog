@@ -1,7 +1,6 @@
 import React from 'react';
 import style from './Category.module.scss';
 import { NavLink } from 'react-router-dom';
-import { PageNavLink } from '../../../../components/PageNavLink';
 
 export const Category: React.FC = () => {
   return (

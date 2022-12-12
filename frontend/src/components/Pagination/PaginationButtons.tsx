@@ -1,9 +1,6 @@
 import classNames from 'classnames';
 import React from 'react';
 import styles from './Pagination.module.scss';
-import { Product } from '../../types/Product';
-
-
 
 type Props = {
   phonesPerPage: number;

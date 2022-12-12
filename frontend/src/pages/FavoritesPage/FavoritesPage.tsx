@@ -1,5 +1,4 @@
 import React from 'react';
-import { Product } from '../../types/Product';
 
 import phonePage from '../../pages/CatalogPage/CatalogPage.module.scss';
 import home from '../../images/home.svg';
@@ -8,17 +7,9 @@ import { Loader } from '../../components/Loader';
 import { ProductCard } from '../../components/ProductCard';
 import { useAppSelector } from '../../app/hooks';
 
-type Props = {
-  handleAddToCart: (product: Product) => void;
-  handleAddToFavorites: (product: Product) => void;
-};
-
-export const FavoritesPage:React.FC<Props> = ({
-  handleAddToCart,
-  handleAddToFavorites,
-}) => {
+export const FavoritesPage:React.FC = () => {
   const products = useAppSelector(state => state.products.items);
-  const isLoading = useAppSelector(state => state.products.loading);
+  const isLoading = useAppSelector(state => state.products.loadingMainData);
 
   const favorites = products.filter(product => product?.liked);
 
@@ -48,8 +39,6 @@ export const FavoritesPage:React.FC<Props> = ({
                 return (
                   <ProductCard
                     product={product}
-                    // handleAddToCart={handleAddToCart}
-                    handleAddToFavorites={handleAddToFavorites}
                     key={product.id}
                   />
                 );

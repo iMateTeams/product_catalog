@@ -1,8 +1,7 @@
 import style from './NewModels.module.scss';
 import { ProductCard } from '../../../../components/ProductCard';
 import { getNewest } from '../../../../api/products';
-import { useEffect, useState, useRef } from 'react';
-import { Product } from '../../../../types/Product';
+import { useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
 
@@ -11,14 +10,9 @@ import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 
 import { useAppSelector, useAppDispatch } from '../../../../app/hooks';
-import { getNewModels } from '../../../../features/products/productsSlice';
+import { setNewModels } from '../../../../features/products/productsSlice';
 
-type Props = {
-  handleAddToCart: (product: Product) => void;
-  handleAddToFavorites: (product: Product) => void;
-}
-
-export const NewModels: React.FC<Props> = ({ handleAddToCart, handleAddToFavorites }) => {
+export const NewModels: React.FC = () => {
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
 
@@ -27,13 +21,17 @@ export const NewModels: React.FC<Props> = ({ handleAddToCart, handleAddToFavorit
   const dispatch = useAppDispatch();
   const newModels = useAppSelector(state => state.products.newModels);
 
-  const getNew = async () => {
-    const newProducts = await getNewest();
-    dispatch(getNewModels(newProducts));
-  };
-
   useEffect(() => {
-    getNew();
+    const fetchNewModeles = async () =>{
+      const newModelesData = await getNewest()
+        .then((res) => {
+          dispatch(setNewModels(res.data));
+        });
+
+      return newModelesData;
+    };
+
+    fetchNewModeles();
   }, []);
 
   const handleNext = () => {
@@ -88,8 +86,6 @@ export const NewModels: React.FC<Props> = ({ handleAddToCart, handleAddToFavorit
             <SwiperSlide key={product.id}>
               <ProductCard
                 product={product}
-                // handleAddToCart={handleAddToCart}
-                handleAddToFavorites={handleAddToFavorites}
                 key={product.id}
               />
             </SwiperSlide>

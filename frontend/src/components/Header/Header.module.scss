@@ -78,11 +78,15 @@
     background-image: url(../../images/liked.svg);
     background-repeat: no-repeat;
     background-size: cover;
-    transition: 0.3s;
+    transition: transform 0.3s ease-in-out;
     
 
     &:hover {
       transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.8);
     }
   }
 
@@ -121,10 +125,14 @@
     background-image: url(../../images/beg.svg);
     background-repeat: no-repeat;
     background-size: cover;
-    transition: 0.3s;
+    transition: transform 0.3s ease-in-out;
 
     &:hover {
       transform: scale(1.1);
+    }
+
+    &:active {
+      transform: scale(0.8) rotate(180deg);
     }
   }
 
@@ -165,7 +173,6 @@
   @include onTablet {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-content: center;
   }
 
@@ -181,18 +188,19 @@
   &__item {
     display: flex;
     width: 100%;
-    padding-right: 32px;
+    margin-right: 32px;
 
     &:last-child {
-      padding-right: 0;
+      margin-right: 0;
     }
 
     @include onDesktop {
-      padding-right: 64px;
+      margin-right: 64px;
     }
   }
 
   &__link {
+    padding: 18px 0;
     position: relative;
     font-family: 'Mont';
     font-style: normal;
@@ -203,28 +211,51 @@
     text-transform: uppercase;
     color: #89939A;
     text-decoration: none;
+    transition: 0.3s;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none;
+
+    @include onDesktop {
+      padding: 24px 0;
+    }
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 100%;
+      height: 2px;
+      background-color: #313237;
+      width: 0;
+      transition: 0.4s;
+      left: 50%;
+
+      @include onTablet {
+        bottom: -18.5px;
+      }
+
+      @include onDesktop {
+        bottom: -26.5px;
+      }
+    }
+
+    &::before {
+      right: 0;
+    }
+
+    &:hover::before {
+      width: 100%;
+      left: 0;
+    }
 
     &:hover {
       color: #313237;
+    }
 
-      &::before {
-        content: "";
-        display: block;
-        position: absolute;
-        bottom: -8px;
-        width: 100%;
-        height: 2px;
-        background-color: #313237;
-
-        @include onTablet {
-          bottom: -18.5px;
-        }
-
-
-        @include onDesktop {
-          bottom: -26.5px;
-        }
-      }
+    &:active {
+      color: #89939A;
+      transform: scale(0.9);
     }
   }
 }

@@ -9,34 +9,13 @@ import { HotPrices } from './components/HotPrices';
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
-import { Product } from '../../types/Product';
 
-type Props = {
-  handleAddToCart: (product: Product) => void;
-  handleAddToFavorites: (product: Product) => void;
-}
-
-export const HomePage: React.FC<Props> = ({ handleAddToCart, handleAddToFavorites }) => {
-  const [currentPage, setCurrentPage] = React.useState(1);
+export const HomePage: React.FC = () => {
+  const [currentPage, setCurrentPage] = React.useState(0);
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
 
   SwiperCore.use([Navigation]);
-
-  const handlePageChange = (direction: string) => {
-    if (currentPage === 1 && direction === 'prev') {
-      setCurrentPage(3);
-    } else if (currentPage === 3 && direction === 'next') {
-      setCurrentPage(1);
-    } else if (direction === 'prev') {
-      console.log(currentPage);
-      setCurrentPage((prev) => prev - 1);
-    } else if (direction === 'next') {
-      setCurrentPage((prev) => prev + 1);
-    }
-
-    console.log(currentPage);
-  };
 
   return (
     <div className={style.grid}>
@@ -47,20 +26,28 @@ export const HomePage: React.FC<Props> = ({ handleAddToCart, handleAddToFavorite
       <div className={style.news_carousel}>
         <div className={style.news_carousel__wrapper}>
           <button
-            className={style.news_carousel__button_left}
-            onClick={() => handlePageChange('prev')}
+            className={style.news_carousel__button}
+            // onClick={() => handlePageChange('prev')}
             ref={navigationPrevRef}
           >
-            <div className={style.news_carousel__button_left_arrow}>
-
+            <div className={`${style.news_carousel__button__arrow} ${style.news_carousel__button__arrow_left}`}>
             </div>
           </button>
           <Swiper
+            onSlideChange={(swiper) => {
+              console.log(swiper.activeIndex);
+              if (swiper.activeIndex === 0) {
+                setCurrentPage(0);
+              } else if (swiper.activeIndex === 1) {
+                setCurrentPage(1);
+              } else {
+                setCurrentPage(swiper.activeIndex);
+              }
+            }}
             navigation={{
               prevEl: navigationPrevRef.current,
               nextEl: navigationNextRef.current,
             }}
-            loop={true}
             spaceBetween={50}
           >
             <SwiperSlide>
@@ -122,43 +109,30 @@ export const HomePage: React.FC<Props> = ({ handleAddToCart, handleAddToFavorite
             </SwiperSlide>
           </Swiper>
           <button
-            className={style.news_carousel__button_right}
-            onClick={() => handlePageChange('next')}
+            className={style.news_carousel__button}
+            // onClick={() => handlePageChange('next')}
             ref={navigationNextRef}
           >
-            <div className={style.news_carousel__button_right_arrow}>
-
+            <div className={`${style.news_carousel__button__arrow} ${style.news_carousel__button__arrow_right}`}>
             </div>
           </button>
         </div>
 
         <ul className={style.news_carousel__list}>
           <li className={style.news_carousel__list_item}>
-            <button className={`${style.news_carousel__list_item_button} ${currentPage === 1 && style.news_carousel__list_item_button_active}`}>
-
-            </button>
+            <button className={`${style.news_carousel__list_item_button} ${currentPage === 0 && style.news_carousel__list_item_button_active}`} />
           </li>
           <li className={style.news_carousel__list_item}>
-            <button className={`${style.news_carousel__list_item_button} ${currentPage === 2 && style.news_carousel__list_item_button_active}`}>
-
-            </button>
+            <button className={`${style.news_carousel__list_item_button} ${currentPage === 1 && style.news_carousel__list_item_button_active}`} />
           </li>
           <li className={style.news_carousel__list_item}>
-            <button className={`${style.news_carousel__list_item_button} ${currentPage === 3 && style.news_carousel__list_item_button_active}`}>
-
-            </button>
+            <button className={`${style.news_carousel__list_item_button} ${currentPage === 2 && style.news_carousel__list_item_button_active}`} />
           </li>
         </ul>
       </div>
-      <NewModels
-        handleAddToCart={handleAddToCart}
-        handleAddToFavorites={handleAddToFavorites}
-      />
+      <NewModels />
       <Category />
-      <HotPrices
-        handleAddToCart={handleAddToCart}
-        handleAddToFavorites={handleAddToFavorites}
-      />
+      <HotPrices />
     </div>
   );
 };

@@ -222,13 +222,83 @@
     }
   }
 
-  &__button_left {
+  // &__button_left {
+  //   position: relative;
+  //   box-sizing: border-box;
+  //   border: 1px solid #B4BDC4;
+  //   width: 48px;
+  //   height: 400px;
+  //   display: none;
+
+  //   @include onTablet {
+  //     display: block;
+  //     height: 200px;
+  //   }
+
+  //   @include onDesktop {
+  //     height: 400px;
+  //   }
+
+  //   &_arrow {
+  //     background-image: url(../../../images/ArrowLeft.svg);
+  //     background-repeat: no-repeat;
+  //     background-position: center;
+  //     position: absolute;
+  //     top: 50%;
+  //     left: 50%;
+  //     transform: translate(-50%, -50%);
+  //     height: 16px;
+  //     width: 16px;
+  //     display: none;
+
+  //     @include onTablet {
+  //       display: block;
+  //     }
+  //   }
+  // }
+
+  // &__button_right {
+  //   position: relative;
+  //   box-sizing: border-box;
+  //   border: 1px solid #B4BDC4;
+  //   width: 48px;
+  //   height: 400px;
+  //   display: none;
+
+  //   @include onTablet {
+  //     display: block;
+  //     height: 200px;
+  //   }
+
+  //   @include onDesktop {
+  //     height: 400px;
+  //   }
+
+  //   &_arrow {
+  //     background-image: url(../../../images/VectorArrowRight.svg);
+  //     background-repeat: no-repeat;
+  //     background-position: center;
+  //     position: absolute;
+  //     top: 50%;
+  //     left: 50%;
+  //     transform: translate(-50%, -50%);
+  //     height: 16px;
+  //     width: 16px;
+  //   }
+  // }
+
+  &__button {
     position: relative;
     box-sizing: border-box;
     border: 1px solid #B4BDC4;
     width: 48px;
     height: 400px;
     display: none;
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: #FAFBFC;
+    }
 
     @include onTablet {
       display: block;
@@ -239,8 +309,7 @@
       height: 400px;
     }
 
-    &_arrow {
-      background-image: url(../../../images/ArrowLeft.svg);
+    &__arrow {
       background-repeat: no-repeat;
       background-position: center;
       position: absolute;
@@ -254,36 +323,14 @@
       @include onTablet {
         display: block;
       }
-    }
-  }
 
-  &__button_right {
-    position: relative;
-    box-sizing: border-box;
-    border: 1px solid #B4BDC4;
-    width: 48px;
-    height: 400px;
-    display: none;
+      &_right {
+        background-image: url(../../../images/VectorArrowRight.svg);
+      }
 
-    @include onTablet {
-      display: block;
-      height: 200px;
-    }
-
-    @include onDesktop {
-      height: 400px;
-    }
-
-    &_arrow {
-      background-image: url(../../../images/VectorArrowRight.svg);
-      background-repeat: no-repeat;
-      background-position: center;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      height: 16px;
-      width: 16px;
+      &_left {
+        background-image: url(../../../images/ArrowLeft.svg);
+      }
     }
   }
 

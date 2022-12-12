@@ -66,15 +66,28 @@
     justify-content: center;
     text-align: center;
   }
-  &_product {
+  &_product {    
+    border: 1px solid $elements-color-light-gray;
+    margin: 16px 0;
+    padding: 16px;
+    animation: slideRight 0.5s ease-in-out;
+
+    @keyframes slideRight {
+      0% {
+        transform: translateX(-70%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
     @include onTablet {
       display: flex;
       justify-content: space-between;
     }
-    
-    border: 1px solid $elements-color-light-gray;
-    margin: 16px 0;
-    padding: 16px;
+
     &__del {
       height: 10px;
       margin-right: 19px;
@@ -115,23 +128,46 @@
         min-width: 248px;
       }
     }
+
     &__count_box {
       display: flex;
     }
+
     &__button {
       border: 1px solid $elements-color-light-gray;
       width: 32px;
       height: 32px;
+
+      &_del {
+        border: 1px solid $elements-color-light-gray;
+        background-color: $white-color;
+        border: 1px solid $white-color;
+        width: 10px;
+        height: 10px;
+        margin-right: 25px;
+        color: $secondary-color-gray;
+
+        &__image {
+          width: 10px;
+          height: 10px;
+          object-fit: contain;
+          background-image: url('../../images/cross.svg');
+          background-repeat: no-repeat;
+          background-position: center;
+          transition: scale, rotate3d, 0.3s;
+
+          &:hover {
+            cursor: pointer;
+            transform: scale(1.2) rotate3d(-5, 5, 5, -5deg);
+          }
+
+          &:active {
+            transform: scale(0.7)
+          }
+        }
+      }
     }
-    &__button_del {
-      border: 1px solid $elements-color-light-gray;
-      background-color: $white-color;
-      border: 1px solid $white-color;
-      width: 10px;
-      height: 10px;
-      margin-right: 25px;
-      color: $secondary-color-gray;
-    }
+
     &__count {
       width: 32px;
       height: 32px;
@@ -150,6 +186,7 @@
       line-height: 31px;
     }
   }
+
   &__checkout {
     display: block;
     justify-content: space-between;
@@ -195,6 +232,7 @@
       margin-bottom: 24px;
     }
   }
+
   &__total_price {
     font-weight: 800;
     font-size: 32px;

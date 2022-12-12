@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { Product } from '../../types/Product';
+import React, { useState, useEffect } from 'react';
 import styleCart from './CartPage.module.scss';
 import arrow_left from '../../images/ArrowLeft.svg';
 import { ProductInCart } from '../../components/ProductInCart';
@@ -8,11 +7,12 @@ import { clearCart } from '../../features/products/productsSlice';
 
 export const CartPage: React.FC = () => {
   const [isCheck, setCheckout] = useState(false);
+  const [cartPrice , setCartPrice] = useState(0);
 
+  const dispatch = useAppDispatch();
   const cart = useAppSelector(state => state.products.itemsInCart);
   const products = useAppSelector(state => state.products.items);
   const totalPrice = useAppSelector(state => state.products.totalCartPrice);
-  const dispatch = useAppDispatch();
 
   const clearCartOnClick = () => {
     setCheckout(false);
@@ -21,6 +21,20 @@ export const CartPage: React.FC = () => {
   const saveCartOnClick = () => {
     setCheckout(false);
   };
+
+  const handleAddOne = () => {
+    if (totalPrice - cartPrice < 100) {
+      setCartPrice(cartPrice + 1);
+    } else {
+      setCartPrice(cartPrice + 10);
+    }
+  };
+
+  useEffect(() => {
+    if (cartPrice < totalPrice) {
+      handleAddOne();
+    }
+  }, [cartPrice, totalPrice]);
   
   return(
     <div className={styleCart.page}>
@@ -28,7 +42,7 @@ export const CartPage: React.FC = () => {
       <a href="#" className={styleCart.page_nav}>
         <img src={arrow_left} alt="Arrow" className={styleCart.page_nav__img}/>
         <p className={styleCart.page_nav__title}>
-            Back
+          Back
         </p>
       </a>
   
@@ -36,24 +50,25 @@ export const CartPage: React.FC = () => {
       <section className={styleCart.page_cart}>
         <div className={styleCart.cart_box}>
           <ul className={styleCart.cart_list}>
-            { products.map(product => (
+            { cart.map(product => (
               <ProductInCart
                 product={product} 
                 key={product.id}
               />
             ))}
-            
           </ul>
         </div>
         <div className={styleCart.cart_box_total}>
-          <p className={styleCart.cart__total_price}>{`$${totalPrice}`}</p>
+          <p className={styleCart.cart__total_price}>{`$${cartPrice}`}</p>
           <p className={styleCart.cart__count_items}>{`Total for ${products.reduce((sum, product) => ((product.count || 0) + sum), 0)} items`}</p>
       
           <div className={styleCart.cart__checkout}>
             <button 
               className={styleCart.cart__checkout_cart}
               onClick={() => setCheckout(true)}
-            >Checkout</button>
+            >
+              Checkout
+            </button>
           </div>
         </div>
       </section>
@@ -73,16 +88,13 @@ export const CartPage: React.FC = () => {
                 type="button"
                 className={styleCart.cart__checkout_cart}
                 onClick={() => saveCartOnClick()}
-              >No</button>
-
+              >
+                No
+              </button>
             </div>
-            
-          
           </div>
         </div>
-      )}
-        
+      )}    
     </div>
-    
   );
 };

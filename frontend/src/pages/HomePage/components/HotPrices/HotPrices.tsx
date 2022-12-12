@@ -1,32 +1,37 @@
 import style from './HotPrices.module.scss';
 import { ProductCard } from '../../../../components/ProductCard';
-import { getBestPrice } from '../../../../api/products';
-import { useEffect, useState, useRef } from 'react';
-import { Product } from '../../../../types/Product';
+import { useEffect, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation } from 'swiper';
+import { useAppSelector, useAppDispatch } from '../../../../app/hooks';
+import { setHotPrices } from '../../../../features/products/productsSlice';
 
 import 'swiper/scss';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
+import { getBestPrice } from '../../../../api/products';
 
-type Props = {
-  handleAddToCart: (product: Product) => void;
-  handleAddToFavorites: (product: Product) => void;
-}
-
-export const HotPrices: React.FC<Props> = ({ handleAddToCart, handleAddToFavorites }) => {
-  const [products, setProducts] = useState<Product[]>([]);
+export const HotPrices: React.FC = () => {
+  // const [products, setProducts] = useState<Product[]>([]);
   const navigationPrevRef = useRef(null);
   const navigationNextRef = useRef(null);
 
   SwiperCore.use([Navigation]);
 
+  const dispatch = useAppDispatch();
+  const hotPrices = useAppSelector(state => state.products.hotPrices);
+
   useEffect(() => {
-    getBestPrice()
-      .then((products) => {
-        setProducts(products);
-      });
+    const fetchBestPrice = async () => {
+      const bestPriceData = await getBestPrice()
+        .then((res) => {
+          dispatch(setHotPrices(res.data));
+        });
+
+      return bestPriceData;
+    };
+
+    fetchBestPrice();
   }, []);
 
   const handleNext = () => {
@@ -77,12 +82,10 @@ export const HotPrices: React.FC<Props> = ({ handleAddToCart, handleAddToFavorit
             nextEl: navigationNextRef.current,
           }}
         >
-          {products.map(product => (
+          {hotPrices.map(product => (
             <SwiperSlide key={product.id}>
               <ProductCard
                 product={product}
-                // handleAddToCart={handleAddToCart}
-                handleAddToFavorites={handleAddToFavorites}
                 key={product.id}
               />
             </SwiperSlide>

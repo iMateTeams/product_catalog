@@ -43,6 +43,14 @@
   margin: 0;
 }
 
+body {
+  height: 100%;
+}
+
+.section {
+  min-height: calc(100vh - 244px);
+}
+
 @font-face {
   font-family: "Mont";
   src: url(./fonts/Mont-Regular.ttf);
