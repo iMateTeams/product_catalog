@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styleCart from '../../pages/CartPage/CartPage.module.scss';
 
 import { Product } from '../../types/Product';
-import { handleAddToCart, updateProductSuccess, updateTotalCartPrice } from '../../features/products/productsSlice';
+import { handleUpdateProductCard, updateProductSuccess, updateTotalCartPrice } from '../../features/products/productsSlice';
 import { useAppDispatch } from '../../app/hooks';
 
 type Props = {
@@ -47,7 +47,7 @@ export const ProductInCart: React.FC<Props> = ({
     console.log('change', productInCart);
   
     console.log('updatedData', productInCart);
-    dispatch(handleAddToCart(productInCart));
+    dispatch(handleUpdateProductCard(productInCart));
     dispatch(updateProductSuccess(productInCart));
     dispatch(updateTotalCartPrice());
   };

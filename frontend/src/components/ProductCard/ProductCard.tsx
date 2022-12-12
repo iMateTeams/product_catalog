@@ -3,8 +3,7 @@ import productCard from './ProductCard.module.scss';
 import { Product } from '../../types/Product';
 import { useAppDispatch } from '../../app/hooks';
 import {
-  handleAddToCart,
-  handleAddToLiked,
+  handleUpdateProductCard,
   updateProductSuccess,
   updateTotalCartPrice,
 } from '../../features/products/productsSlice';
@@ -47,13 +46,24 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
     console.log('change', productInCart);
   
     console.log('updatedData', productInCart);
-    dispatch(handleAddToCart(productInCart));
+    dispatch(handleUpdateProductCard(productInCart));
     dispatch(updateProductSuccess(productInCart));
     dispatch(updateTotalCartPrice());
   };
 
   const handleAddToLikedClick = () => {
-    dispatch(handleAddToLiked(product));
+    let productInLiked;
+
+    if (product.liked === undefined) {
+      productInLiked = { ...product, liked: true };
+    } else if (product.liked) {
+      productInLiked = { ...product, liked: false };
+    } else {
+      productInLiked = { ...product, liked: true };
+    }
+
+    dispatch(handleUpdateProductCard(productInLiked));
+    dispatch(updateProductSuccess(productInLiked));
   };
 
   return (

@@ -64,6 +64,24 @@ export const productsSlice = createSlice({
         state.itemsInCart = state.itemsInCart.filter((item) => +item.id !== +action.payload.id);
       }
 
+      if (action.payload.liked) {
+        state.itemsLiked.push(action.payload);
+      } else {
+        state.itemsLiked = state.itemsLiked.filter((item) => +item.id !== +action.payload.id);
+      }
+
+      const indexNewModels = state.newModels.findIndex((item) => item.id === action.payload.id);
+
+      if (indexNewModels !== -1) {
+        state.newModels[indexNewModels] = action.payload;
+      }
+
+      const indexHotPrices = state.hotPrices.findIndex((item) => item.id === action.payload.id);
+
+      if (indexHotPrices !== -1) {
+        state.hotPrices[indexHotPrices] = action.payload;
+      }
+
       console.log('cartLengthBeforeUpdate', state.itemsInCart.length);
     },
 
@@ -84,7 +102,7 @@ export const productsSlice = createSlice({
       state.totalCartPrice = 0;
     },
 
-    handleAddToCart(state, action: PayloadAction<Product>) {
+    handleUpdateProductCard(state, action: PayloadAction<Product>) {
       const { id } = action.payload;
   
       try {
@@ -92,11 +110,6 @@ export const productsSlice = createSlice({
       } catch (error) {
         console.log(error);
       }
-    },
-
-    handleAddToLiked(state, action: PayloadAction<Product>) {
-      console.log('likedLengthBeforeUpdate', state.itemsLiked.length);
-      console.log(action);
     },
 
     setHotPrices(state, action: PayloadAction<Product[]>) {
@@ -117,10 +130,9 @@ export const {
   updateProductFailure,
   updateTotalCartPrice,
   clearCart,
-  handleAddToCart,
-  handleAddToLiked,
   setHotPrices,
   setNewModels,
+  handleUpdateProductCard
 } = productsSlice.actions;
 
 export default productsSlice.reducer;
