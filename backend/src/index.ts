@@ -73,6 +73,7 @@ app.use('/', (req, res, next) => {
     const { id } = req.params;
     const { liked, inCart } = req.body;
     const phone = phones.find((phone) => +phone.id === +id);
+
     if (phone) {
       phone.liked = liked;
       phone.inCart = inCart;
