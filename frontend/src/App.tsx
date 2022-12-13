@@ -7,6 +7,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 
 import { Footer } from './components/Footer';
 import { BurgerMenu } from './components/BurgerMenu';
+import { AuthPopup } from './components/AuthPopup';
 
 import { AccessoriesPage } from './pages/AccessoriesPage';
 import { CatalogPage } from './pages/CatalogPage/CatalogPage';
@@ -62,6 +63,7 @@ const App: React.FC = () => {
 
   return (
     <div className='app'>
+      <AuthPopup />
       <Header
         onClick={() => setBurgerActive(!burgerActive)}
         clicked={burgerActive}

@@ -1,0 +1,36 @@
+@import "../../utils/mixins.scss";
+@import '../../utils/vars.scss';
+
+$desktop-width: 400px;
+$desktop-height: 500px;
+
+.auth_popup {
+  height: $desktop-height;
+  width: $desktop-width;
+  background-color: black;
+  position: fixed;
+  top: calc(50vh - ($desktop-height / 2));
+  left: calc(50vw - ($desktop-width / 2));
+  z-index: 5;
+  box-shadow: 8px 8px 8px 1px rgba(150, 76, 76, 0.75);
+  // -webkit-box-shadow: 8px 8px 8px 1px rgba(255,0,0,0.75);
+  // -moz-box-shadow: 8px 8px 8px 1px rgba(255,0,0,0.75);
+  border-radius: 10px;
+  opacity: 95%;
+  display: flex;
+
+  &__title {
+    font-size: 42px;
+    color: white;
+    margin: 42px auto;
+  }
+}
+
+.blender {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  background-color: rgb(85, 84, 84);
+  z-index: 4;
+  opacity: 70%;
+}

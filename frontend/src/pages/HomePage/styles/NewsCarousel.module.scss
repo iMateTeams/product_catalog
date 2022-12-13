@@ -202,6 +202,25 @@
         background-size: contain;
         background-position: center;
         margin: 0 30px;
+        animation: pop 6s;
+
+        @keyframes pop {
+          0% {
+            transform: translateY(100%);
+          }
+
+          60% {
+            transform: translateY(20%);
+          }
+
+          80% {
+            transform: translateY(60%);
+          }
+
+          100% {
+            transform: translateY(0);
+          }
+        }
 
         &_phone {
           background-image: url(../../../images/iphone_14_pro_hero.jpg);
