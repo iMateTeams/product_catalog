@@ -21,8 +21,8 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   // const productsInCart = useAppSelector((state) => state.products.itemsInCart);
 
   useEffect(() => {
-    // fetch(`https://i-mate-teams-product-catalog.herokuapp.com/${image}`)
-    fetch(`http://localhost:4002/${image}`)
+    fetch(`https://i-mate-teams-product-catalog.herokuapp.com/${image}`)
+    // fetch(`http://localhost:4002/${image}`)
       .then((response) => response.blob())
       .then((blob) => {
         const url = URL.createObjectURL(blob);

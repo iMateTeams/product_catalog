@@ -15,8 +15,8 @@ export const ProductInCart: React.FC<Props> = ({
   const [img, setImg] = useState('');
 
   useEffect(() => {
-    fetch(`http://localhost:4002/${product.image}`)
-    // fetch(`https://i-mate-teams-product-catalog.herokuapp.com/${product.image}`)
+    // fetch(`http://localhost:4002/${product.image}`)
+    fetch(`https://i-mate-teams-product-catalog.herokuapp.com/${product.image}`)
       .then(response => response.blob())
       .then(blob => {
         const url = URL.createObjectURL(blob);

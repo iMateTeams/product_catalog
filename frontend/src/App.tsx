@@ -63,7 +63,7 @@ const App: React.FC = () => {
 
   return (
     <div className='app'>
-      <AuthPopup />
+      {/* <AuthPopup /> */}
       <Header
         onClick={() => setBurgerActive(!burgerActive)}
         clicked={burgerActive}
